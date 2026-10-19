@@ -33,7 +33,12 @@ import img5 from "@/assets/poltrona-5.webp.asset.json";
 import img6 from "@/assets/poltrona-6.webp.asset.json";
 import img7 from "@/assets/poltrona-7.webp.asset.json";
 import img8 from "@/assets/poltrona-8.webp.asset.json";
-import nossaLojaVideo from "@/assets/poltrona-video.mp4.asset.json";
+import garantiaVideo from "@/assets/garantia-video.mp4.asset.json";
+import puff250kg from "@/assets/puff-250kg.png.asset.json";
+import puffPets from "@/assets/puff-pets.png.asset.json";
+import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
+import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
+import conforto3Meses from "@/assets/conforto-3-meses.png.asset.json";
 import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
@@ -200,12 +205,12 @@ function NossaLojaPlayer() {
 
   return (
     <div className="rounded-lg bg-player p-4 text-player-foreground shadow-product sm:col-span-2 lg:col-span-4">
-      <p className="text-center font-serif text-2xl tracking-[0.3em]">VEJA EM AÇÃO</p>
-      <p className="mt-1 text-center text-xs text-player-muted">Você tem 7 dias para trocas ou devoluções.</p>
+      <p className="text-center font-serif text-2xl tracking-[0.3em]">CONFIANÇA E GARANTIA</p>
+      <p className="mt-1 text-center text-xs text-player-muted">Trocas e devoluções em até 30 dias sem complicações.</p>
       <div className="relative mt-4 overflow-hidden rounded-md bg-player">
         <video
           ref={videoRef}
-          src={nossaLojaVideo.url}
+          src={garantiaVideo.url}
           className="mx-auto block max-h-[70vh] w-full cursor-pointer"
           loop
           playsInline
