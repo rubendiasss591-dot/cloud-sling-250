@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Feito nesta rodada
+- [x] Centralizar todas as saídas na função global redirectWithParams; 6 testes passaram e os 3 kits preservaram integralmente UTM, fbclid, gclid e parâmetros repetidos, sem alterar regras ou etapas
 - [x] Prova social: foto nos 2 comentários que estavam sem foto
 - [x] Fotos na proporção correta (retrato, preenchendo o cartão sem bordas brancas)
 - [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane
