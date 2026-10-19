@@ -1,8 +1,9 @@
 # Roadmap
 
-## Em andamento
-- [ ] Prova social: foto dos 2 comentários que estavam sem foto na proporção certa, igual às demais imagens
-- [ ] Usar a nova foto enviada (D_NQ_NP_2X_890179-MLA116914218877_082026-F.webp) em uma das avaliações
+## Feito nesta rodada
+- [x] Prova social: foto nos 2 comentários que estavam sem foto
+- [x] Fotos na proporção correta (retrato, preenchendo o cartão sem bordas brancas)
+- [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
