@@ -11,8 +11,8 @@
 - [x] Nome no topo da página corrigido para SERENA HOME SHOP (ainda dizia CASA CONFORTO)
 - [x] Regra de escassez: no bloco "AO VIVO" as unidades só diminuem, nunca sobem (param em 4)
 - [x] Preços: 1 Puff R$ 49,97 (de R$ 111,90); tachados = 111,90 × nº de puffs (223,80 / 447,60), ECONOMIZE 55/71/73%, riscados em preto
+- [x] Link de pagamento de cada kit ligado ao botão comprar (1 / 2 / 4 puffs), conferido um a um
 
 ## Pendentes (esperando o usuário)
-- [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
 - [ ] Arquivo de vídeo do review (só o frame JPEG está disponível)
 - [ ] Definir se o "frete grátis" do topo e dos cartões deve ser removido

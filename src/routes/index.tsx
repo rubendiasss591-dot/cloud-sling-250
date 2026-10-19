@@ -69,9 +69,9 @@ const allImages = [img1, sofaComPuff, img2, img3, img4, img5, img6, img7, img8].
 const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável com puff - foto ${i + 1}` }));
 
 const palettes = {
-  "1 Puff": { image: allImages[0], old: "R$ 111,90", price: "R$ 49,97", off: "55% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
-  "2 Puffs": { image: allImages[0], old: "R$ 223,80", price: "R$ 65,90", off: "71% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
-  "4 Puffs": { image: allImages[0], old: "R$ 447,60", price: "R$ 121,90", off: "73% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "1 Puff": { image: allImages[0], old: "R$ 111,90", price: "R$ 49,97", off: "55% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/c099eb62-cbd0-4320-ade2-1d823fe4fec3" },
+  "2 Puffs": { image: allImages[0], old: "R$ 223,80", price: "R$ 65,90", off: "71% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/313c562c-c179-48e1-a567-d101f3478602" },
+  "4 Puffs": { image: allImages[0], old: "R$ 447,60", price: "R$ 121,90", off: "73% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/83d4a981-84bf-4173-b38b-4e2d69e8262c" },
 } as const;
 
 type PaletteName = keyof typeof palettes;
