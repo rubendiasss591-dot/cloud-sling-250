@@ -84,10 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Casa Conforto" },
+      { title: "Serena Home Shop" },
       { name: "description", content: "Poltrona Sofá Inflável com puff, suporta até 250kg." },
-      { name: "author", content: "Casa Conforto" },
-      { property: "og:title", content: "Casa Conforto" },
+      { name: "author", content: "Serena Home Shop" },
+      { property: "og:title", content: "Serena Home Shop" },
       { property: "og:description", content: "Poltrona Sofá Inflável 250kg com puff." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
