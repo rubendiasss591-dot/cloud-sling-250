@@ -39,7 +39,7 @@ import puffReforcado from "@/assets/puff-reforcado.png.asset.json";
 import puffPets from "@/assets/puff-pets.png.asset.json";
 import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
-import conforto3Meses from "@/assets/conforto-3-meses.png.asset.json";
+import conforto3Meses from "@/assets/cama-3-meses.png.asset.json";
 import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
 import review1Asset from "@/assets/review-1.jpg.asset.json";
 import review2Asset from "@/assets/review-2.jpg.asset.json";
@@ -570,7 +570,7 @@ function Index() {
               { src: puffPets.url, alt: "Puff resistente para pets felizes" },
               { src: puffLavavel.url, alt: "Puff pet lavável e impermeável" },
               { src: infograficoEncher.url, alt: "Infográfico de como encher a almofada inflável" },
-              { src: conforto3Meses.url, alt: "Conforto que dura por até 3 meses" },
+              { src: conforto3Meses.url, alt: "Cama inflável que dura até 3 meses sem reencher" },
             ].map((image) => <img key={image.src} src={image.src} alt={image.alt} className="aspect-[9/16] w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
             <ProductVideo video={garantiaVideo} title="CONFIANÇA E GARANTIA" subtitle="Trocas e devoluções em até 30 dias sem complicações." label="Vídeo de confiança e garantia da poltrona inflável" />
             <SocialProof />
