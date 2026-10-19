@@ -463,6 +463,11 @@ function LiveScarcity() {
 }
 
 function ProductDetails({ palette, setPalette, color, setColor }: { palette: PaletteName; setPalette: (palette: PaletteName) => void; color: ColorName; setColor: (color: ColorName) => void }) {
+  const [unitColors, setUnitColors] = useState<ColorName[]>(() => Array(4).fill(color));
+  const pickUnit = (u: number, c: ColorName) => {
+    setUnitColors((prev) => prev.map((v, k) => (k === u ? c : v)));
+    setColor(c);
+  };
   return (
     <section id="comprar" className="min-w-0">
       <div className="flex items-center gap-2 text-sm">
