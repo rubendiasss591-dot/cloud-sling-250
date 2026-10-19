@@ -78,12 +78,12 @@
   --soft: oklch(0.94 0.016 76);
   --rating: oklch(0.74 0.18 67);
   --price: oklch(0.55 0.17 145);
-  --discount: oklch(0.9 0.005 250);
+  --discount: oklch(0.95 0.004 250);
   --offer: oklch(0.83 0.04 72);
   --offer-foreground: oklch(0.2 0.02 60);
   --urgency: oklch(0.55 0.21 25);
   --urgency-foreground: oklch(0.99 0 0);
-  --selected: oklch(0.89 0.006 250);
+  --selected: oklch(0.87 0.008 250);
   --buy: oklch(0.55 0.17 145);
   --buy-hover: oklch(0.48 0.16 145);
   --buy-foreground: oklch(0.99 0 0);
