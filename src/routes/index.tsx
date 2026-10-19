@@ -35,7 +35,7 @@ import img7 from "@/assets/poltrona-7.webp.asset.json";
 import img8 from "@/assets/poltrona-8.webp.asset.json";
 import garantiaVideo from "@/assets/garantia-video.mp4.asset.json";
 import poltronaVideo from "@/assets/poltrona-video.mp4.asset.json";
-import puffReforcado from "@/assets/puff-reforcado.png.asset.json";
+import puffReforcado from "@/assets/puff-reforcado-250kg.png.asset.json";
 import puffPets from "@/assets/puff-pets.png.asset.json";
 import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
@@ -566,7 +566,7 @@ function Index() {
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <ProductVideo video={poltronaVideo} title="VEJA EM AÇÃO" subtitle="Você tem 7 dias para trocas ou devoluções." label="Vídeo da poltrona inflável" />
             {[
-              { src: puffReforcado.url, alt: "Puff reforçado e confortável para relaxar" },
+              { src: puffReforcado.url, alt: "Puff reforçado que suporta até 250 kg" },
               { src: puffPets.url, alt: "Puff resistente para pets felizes" },
               { src: puffLavavel.url, alt: "Puff pet lavável e impermeável" },
               { src: infograficoEncher.url, alt: "Infográfico de como encher a almofada inflável" },
