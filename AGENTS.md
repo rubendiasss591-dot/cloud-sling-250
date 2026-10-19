@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the product testimonial in a dedicated SocialProof component immediately after the guarantee video; this preserves the requested content order independently of the product image sequence.
