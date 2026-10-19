@@ -4,6 +4,7 @@
 - [x] Prova social: foto nos 2 comentários que estavam sem foto
 - [x] Fotos na proporção correta (retrato, preenchendo o cartão sem bordas brancas)
 - [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane
+- [x] Imagem "3 meses" da copy trocada pela nova (cama-3-meses.png, sem o texto do pet)
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
