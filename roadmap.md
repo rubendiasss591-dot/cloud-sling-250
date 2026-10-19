@@ -9,6 +9,7 @@
 - [x] Bolinhas de cor (Azul #5C6B86 / Cinza #706761) dentro de cada kit, uma por puff, com o texto pequeno "Selecione as cores do puff" em cima
 - [x] Foto nova do sofá inflável com puff adicionada às fotos do produto
 - [x] Nome no topo da página corrigido para SERENA HOME SHOP (ainda dizia CASA CONFORTO)
+- [x] Regra de escassez: no bloco "AO VIVO" as unidades só diminuem, nunca sobem (param em 4)
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)

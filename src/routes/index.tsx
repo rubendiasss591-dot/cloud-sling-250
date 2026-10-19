@@ -434,8 +434,7 @@ function LiveScarcity() {
   useEffect(() => {
     const tickViewers = () =>
       setViewers((v) => Math.min(16, Math.max(2, v + Math.floor(Math.random() * 5) - 2)));
-    const tickStock = () =>
-      setStock((s) => Math.min(8, Math.max(4, s + (Math.random() < 0.5 ? -1 : 1))));
+    const tickStock = () => setStock((s) => Math.max(4, s - 1));
     let stockId: ReturnType<typeof setInterval> | undefined;
     const firstStockId = setTimeout(() => {
       tickStock();
