@@ -26,96 +26,57 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import gifCopy from "@/assets/gif-copy.mp4.asset.json";
-import nossaLojaVideo from "@/assets/nossa-loja.mp4.asset.json";
-import brancoHotelImage from "@/assets/paleta-branco-hotel.webp.asset.json";
-import eleganceImage from "@/assets/paleta-elegance.webp.asset.json";
-import familiaImage from "@/assets/paleta-familia.webp.asset.json";
-import urbanImage from "@/assets/paleta-urban.webp.asset.json";
+import img1 from "@/assets/poltrona-1.webp.asset.json";
+import img2 from "@/assets/poltrona-2.png.asset.json";
+import img3 from "@/assets/poltrona-3.png.asset.json";
+import img4 from "@/assets/poltrona-4.webp.asset.json";
+import img5 from "@/assets/poltrona-5.webp.asset.json";
+import img6 from "@/assets/poltrona-6.webp.asset.json";
+import img7 from "@/assets/poltrona-7.webp.asset.json";
+import img8 from "@/assets/poltrona-8.webp.asset.json";
+import nossaLojaVideo from "@/assets/poltrona-video.mp4.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kit Serena | 20 Toalhas de Algodão Turco Premium" },
-      {
-        name: "description",
-        content:
-          "Kit Serena: compre 10 toalhas de banho gigantes e ganhe 10 toalhas de rosto por R$ 59,97.",
-      },
-      { property: "og:title", content: "Kit Serena | Compre 10, Ganhe 10" },
-      {
-        property: "og:description",
-        content: "Maciez e absorção de hotel cinco estrelas em um kit com 20 peças.",
-      },
+      { title: "Poltrona Sofá Inflável 250kg com Puff | Casa Conforto" },
+      { name: "description", content: "Poltrona Sofá Inflável com puff, tecido aveludado anti-arranhões e suporte para até 250kg. Frete grátis hoje." },
+      { property: "og:title", content: "Poltrona Sofá Inflável 250kg com Puff" },
+      { property: "og:description", content: "Conforto aveludado, resistente a unhas de pets e suporta até 250kg." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://export-and-play.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://export-and-play.lovable.app/" }],
   }),
   component: Index,
 });
 
-const gallery = [9, 1, 2, 3, 4, 5, 6, 7, 8, 10].map((number) => ({
-  src: `/images/toalhas-${number}.webp`,
-  alt:
-    number === 9
-      ? "Kit Serena com 20 toalhas de algodão turco premium"
-      : `Detalhe do kit de toalhas Serena ${number}`,
-}));
+const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => img.url);
+const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável 250kg com puff - foto ${i + 1}` }));
 
 const palettes = {
-  Elegance: {
-    image: eleganceImage.url,
+  "Bege com Preto": {
+    image: allImages[0],
     checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805",
-  },
-  Família: {
-    image: familiaImage.url,
-    checkout: "https://checkout.serenapagamentoseguro.store/pay/3a8aa197-f7c7-4575-9eed-0d94cf2bc970",
-  },
-  "Branco Hotel": {
-    image: brancoHotelImage.url,
-    checkout: "https://checkout.serenapagamentoseguro.store/pay/afa00454-5ed1-4590-8a0a-a6b8b95ed42b",
-  },
-  Urban: {
-    image: urbanImage.url,
-    checkout: "https://checkout.serenapagamentoseguro.store/pay/1fb307e8-06c1-42df-a76a-7c09dc1d79a3",
   },
 } as const;
 
 type PaletteName = keyof typeof palettes;
 
 const benefits = [
-  {
-    icon: Sparkles,
-    title: "Algodão turco",
-    text: "Fibras premium para mais maciez e durabilidade.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Ultra absorção",
-    text: "Retém mais água sem deixar o tecido encharcado.",
-  },
-  {
-    icon: Clock3,
-    title: "Secagem rápida",
-    text: "Prontas para usar novamente em menos tempo.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Hipoalergênicas",
-    text: "Mais cuidado, conforto e suavidade para a pele.",
-  },
+  { icon: ShieldCheck, title: "Suporta 250kg", text: "Estrutura reforçada para adultos de todos os tamanhos." },
+  { icon: Sparkles, title: "Toque aveludado", text: "Superfície macia e aconchegante para relaxar." },
+  { icon: BadgeCheck, title: "Anti-arranhões", text: "Tecido resistente às unhas de gatos e cães." },
+  { icon: Clock3, title: "Pronta em minutos", text: "Enche rápido e guarda em pouco espaço." },
 ];
 
 const faqs = [
-  ["O kit vem com quantas toalhas?", "São 20 peças: 10 toalhas de banho gigantes e 10 toalhas de rosto de brinde."],
-  ["As toalhas são de algodão turco?", "Sim. O kit é produzido com fibras de algodão turco, conhecidas pela maciez, absorção e durabilidade."],
-  ["Qual é o tamanho das toalhas de banho?", "As toalhas de banho têm tamanho gigante, ideal para envolver o corpo com mais conforto."],
-  ["Quais cores posso escolher?", "Você pode escolher entre as paletas Elegance, Família, Branco Hotel e Urban."],
-  ["As toalhas secam rápido?", "Sim. A trama foi desenvolvida para absorver bem e secar com mais rapidez, mesmo em dias úmidos."],
+  ["O que vem no kit?", "Você recebe a Poltrona Sofá Inflável e o puff para apoiar os pés."],
+  ["Quanto peso ela aguenta?", "A poltrona suporta até 250kg, ideal para adultos."],
+  ["Quais as medidas?", "A poltrona tem 100 cm de largura, 85 cm de profundidade e 70 cm de altura. O puff tem 50 cm de diâmetro."],
+  ["Meu gato pode furar?", "O tecido aveludado é reforçado e resistente a arranhões do dia a dia com pets."],
+  ["É fácil de encher?", "Sim. Enche em poucos minutos e, vazia, pode ser guardada dobrada em qualquer canto."],
 ];
 
 function useCountdown() {
@@ -178,7 +139,7 @@ function Gallery({ palette }: { palette: PaletteName }) {
   const previous = () => setActive((active - 1 + gallery.length) % gallery.length);
   const next = () => setActive((active + 1) % gallery.length);
   const activeImage = active === 0
-    ? { src: paletteImage, alt: `Kit Serena na paleta ${palette}` }
+    ? { src: paletteImage, alt: "Poltrona Sofá Inflável 250kg com puff" }
     : gallery[active] ?? gallery[0];
 
   if (!activeImage) return null;
@@ -186,7 +147,7 @@ function Gallery({ palette }: { palette: PaletteName }) {
   return (
     <div className="min-w-0">
       <div className="relative aspect-square overflow-hidden rounded-xl bg-muted shadow-product">
-        <span className="absolute left-3 top-3 z-10 rounded-md bg-offer px-3 py-1 text-[10px] font-extrabold uppercase text-offer-foreground">20 peças!</span>
+        <span className="absolute left-3 top-3 z-10 rounded-md bg-offer px-3 py-1 text-[10px] font-extrabold uppercase text-offer-foreground">250 KG!</span>
         <img src={activeImage.src} alt={activeImage.alt} className="h-full w-full object-cover" />
         <Button variant="ghost" size="icon" className="gallery-arrow left-3" onClick={previous} aria-label="Imagem anterior">
           <ChevronLeft />
@@ -240,8 +201,8 @@ function NossaLojaPlayer() {
 
   return (
     <div className="rounded-lg bg-player p-4 text-player-foreground shadow-product sm:col-span-2 lg:col-span-4">
-      <p className="text-center font-serif text-2xl tracking-[0.3em]">NOSSA LOJA</p>
-      <p className="mt-1 text-center text-xs text-player-muted">Você tem 30 dias para trocas ou devoluções.</p>
+      <p className="text-center font-serif text-2xl tracking-[0.3em]">VEJA EM AÇÃO</p>
+      <p className="mt-1 text-center text-xs text-player-muted">Você tem 7 dias para trocas ou devoluções.</p>
       <div className="relative mt-4 overflow-hidden rounded-md bg-player">
         <video
           ref={videoRef}
@@ -252,7 +213,7 @@ function NossaLojaPlayer() {
           onClick={togglePlay}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          aria-label="Vídeo da nossa loja"
+          aria-label="Vídeo da poltrona inflável"
         />
         {mutedStart && isPlaying && (
           <button
@@ -304,26 +265,26 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
       </div>
       <p className="mt-5 text-[11px] font-extrabold uppercase tracking-[0.18em] text-primary">Oferta exclusiva por tempo limitado</p>
       <h1 className="mt-4 max-w-xl text-[30px] font-extrabold leading-[1.17] text-foreground sm:text-[38px] lg:text-[40px]">
-        Toalhas Algodão Turco Premium compre 10, ganhe 10 toalhas de rosto [COMPRE 10 GANHE 10]
+        Poltrona Sofá Inflável 250kg com Puff — Aveludada e Anti-Arranhões
       </h1>
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">10 toalhas de banho gigantes + 10 toalhas de rosto de brinde. Maciez e absorção de hotel cinco estrelas.</p>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">Poltrona + puff de apoio para os pés. Conforto aveludado para sala e quarto, resistente às unhas dos pets.</p>
 
       <div className="mt-5 border-y border-border py-4">
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <span className="line-through">R$ 324,00</span>
+          <span className="line-through">R$ 399,90</span>
           <span className="rounded bg-discount px-2 py-1 text-[10px] font-bold text-primary">63% OFF</span>
         </div>
-        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">R$ 59,97</strong></div>
+        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">R$ 147,90</strong></div>
       </div>
 
       <div className="offer-pulse mt-4 rounded-md bg-offer px-4 py-3 text-offer-foreground">
-        <p className="flex items-center gap-2 text-xs font-extrabold"><Gift className="size-4" /> OFERTA COMPRE 10, GANHE 10 — HOJE!</p>
-        <p className="ml-6 mt-1 text-[11px]">Você ganha 10 toalhas de rosto de brinde.</p>
+        <p className="flex items-center gap-2 text-xs font-extrabold"><Gift className="size-4" /> PUFF DE BRINDE — SÓ HOJE!</p>
+        <p className="ml-6 mt-1 text-[11px]">Leve a poltrona e ganhe o puff para apoiar os pés.</p>
       </div>
-      <div className="urgency-pulse mt-2 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA SEU KIT HOJE!</div>
+      <div className="urgency-pulse mt-2 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
 
       <fieldset className="mt-5">
-        <legend className="mb-2 text-xs font-bold">Escolha sua paleta</legend>
+        <legend className="mb-2 text-xs font-bold">Cor</legend>
         <div className="grid grid-cols-2 gap-2">
           {(Object.keys(palettes) as PaletteName[]).map((name) => (
             <Button key={name} variant="outline" onClick={() => setPalette(name)} className={palette === name ? "h-10 border-primary bg-selected text-xs shadow-none hover:bg-selected" : "h-10 text-xs shadow-none"}>
@@ -344,7 +305,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
 }
 
 function Index() {
-  const [palette, setPalette] = useState<PaletteName>("Elegance");
+  const [palette, setPalette] = useState<PaletteName>("Bege com Preto");
   const checkout = palettes[palette].checkout;
   const assuranceItems: Array<[LucideIcon, string, string]> = [
     [Truck, "Envio rápido", "para todo Brasil"],
@@ -356,12 +317,12 @@ function Index() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <div className="bg-banner text-banner-foreground">
         <div className="page-shell flex min-h-8 items-center justify-center gap-4 px-4 py-1 text-center text-[10px] font-extrabold uppercase">
-          <span>Promoção especial Serena • Compre 10 e ganhe 10</span><Countdown compact />
+          <span>Promoção especial • Puff de brinde + frete grátis</span><Countdown compact />
         </div>
       </div>
       <header className="border-b border-border bg-nav">
         <div className="page-shell flex h-[62px] items-center justify-center px-5">
-          <a href="#top" className="font-serif text-xl tracking-[0.35em] text-primary">SERENA</a>
+          <a href="#top" className="font-serif text-xl tracking-[0.35em] text-primary">CASA CONFORTO</a>
         </div>
       </header>
 
@@ -377,44 +338,19 @@ function Index() {
         </div>
       </section>
 
-      <section className="page-shell px-5 py-16 text-center">
-        <p className="section-kicker">Direto do Instagram</p>
-        <h2 className="section-title">Toalhas Serena na vida real</h2>
-        <div className="mx-auto mt-8 max-w-[420px] overflow-hidden rounded-lg border border-border bg-card shadow-product">
-          <iframe title="Instagram Serena Home Shop" src="https://www.instagram.com/reel/Dd68mCpOuUg/embed" className="h-[660px] w-full border-0" loading="lazy" />
-        </div>
-      </section>
-
       <section id="kit" className="bg-soft py-16">
         <div className="page-shell px-5">
           <p className="section-kicker text-center">Qualidade em cada detalhe</p>
-          <h2 className="section-title text-center">Feitas para transformar seu banho</h2>
-           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-             <img src="/images/toalha-copy-1.webp" alt="Destaque das toalhas Serena 1" className="aspect-[2/3] w-full rounded-lg object-cover shadow-product" />
-             <NossaLojaPlayer />
-             <video src={gifCopy.url} className="aspect-[16/9] w-full rounded-lg object-cover shadow-product sm:col-span-2 lg:col-span-4" autoPlay muted loop playsInline aria-label="Demonstração das toalhas Serena" />
-             {[2, 3, 4].map((number) => <img key={number} src={`/images/toalha-copy-${number}.webp`} alt={`Destaque das toalhas Serena ${number}`} className="aspect-[2/3] w-full rounded-lg object-cover shadow-product" />)}
-          </div>
-        </div>
-      </section>
-
-      <section className="page-shell px-5 py-16">
-        <div className="mx-auto aspect-[9/16] w-full max-w-[607px] overflow-hidden rounded-xl bg-foreground shadow-product">
-          <iframe className="h-full w-full border-0" src="https://www.youtube.com/embed/b7q9S2iTV-I?rel=0" title="Sinta o toque de um hotel 5 estrelas em casa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-        </div>
-      </section>
-
-      <section className="bg-soft py-16">
-        <div className="page-shell px-5 text-center">
-          <p className="section-kicker">Quem compra, recomenda</p><h2 className="section-title">O conforto que conquista</h2>
-          <div className="mt-9 grid gap-5 sm:grid-cols-3">
-            {[5, 6, 7].map((number) => <img key={number} src={`/images/toalha-copy-${number}.webp`} alt={`Avaliação de cliente Serena ${number - 4}`} className="mx-auto aspect-[9/16] max-h-[600px] w-full rounded-lg object-cover shadow-product" />)}
+          <h2 className="section-title text-center">Feita para o seu descanso</h2>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <NossaLojaPlayer />
+            {allImages.slice(1).map((src, i) => <img key={src} src={src} alt={`Detalhe da poltrona inflável ${i + 2}`} className="aspect-square w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
           </div>
         </div>
       </section>
 
       <section id="beneficios" className="page-shell px-5 py-16 text-center">
-        <p className="section-kicker">Padrão hotelaria cinco estrelas</p><h2 className="section-title">Maciez premium que você sente no primeiro toque</h2>
+        <p className="section-kicker">Conforto e resistência</p><h2 className="section-title">O canto de relaxar que sua casa merece</h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ icon: Icon, title, text }) => <article key={title}><div className="mx-auto grid size-12 place-items-center rounded-full bg-selected text-primary"><Icon className="size-6" /></div><h3 className="mt-4 text-base font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
         </div>
@@ -429,7 +365,7 @@ function Index() {
       </section>
 
       <section className="bg-final py-16 text-final-foreground">
-        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Renove seus banhos com conforto cinco estrelas</h2><p className="mt-4 text-sm text-final-muted">Aproveite a condição Compre 10, Ganhe 10 por apenas R$ 59,97.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
+        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff de brinde por apenas R$ 147,90.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
       </section>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 backdrop-blur sm:hidden">
         <BuyButton checkout={checkout} />
