@@ -328,9 +328,9 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
         </div>
       </fieldset>
 
-      <div className="mt-4 grid grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-lg border border-border p-3">
-        <img src="/images/correios-logo.png" alt="Correios" className="h-12 w-16 object-contain" />
-        <div className="min-w-0"><span className="text-[10px] uppercase text-muted-foreground">Oferta adicional</span><p className="text-xs font-extrabold text-primary">FRETE GRÁTIS SOMENTE HOJE</p></div>
+      <div className="mt-4 grid grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-lg border border-border bg-card p-3">
+        <img src={bombaAsset.url} alt="Bomba de ar para encher a poltrona" className="h-16 w-16 rounded-md object-cover" />
+        <div className="min-w-0"><span className="text-[10px] uppercase text-muted-foreground">Oferta adicional</span><p className="text-xs font-extrabold text-primary">Leve a bomba para encher seu puff em 15 minutos, apenas hoje</p><p className="text-sm font-extrabold text-price">De graça.</p></div>
       </div>
       <BuyButton checkout={palettes[palette].checkout} className="mt-3" />
       <p className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground"><LockKeyhole className="size-3.5" /> Compra segura e protegida</p>
