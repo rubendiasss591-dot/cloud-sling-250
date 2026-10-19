@@ -1,24 +1,375 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  BadgeCheck,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  Gift,
+  LockKeyhole,
+  PackageCheck,
+  Pause,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Truck,
+  Volume2,
+  type LucideIcon,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import img1 from "@/assets/poltrona-1.webp.asset.json";
+import img2 from "@/assets/poltrona-2.png.asset.json";
+import img3 from "@/assets/poltrona-3.png.asset.json";
+import img4 from "@/assets/poltrona-4.webp.asset.json";
+import img5 from "@/assets/poltrona-5.webp.asset.json";
+import img6 from "@/assets/poltrona-6.webp.asset.json";
+import img7 from "@/assets/poltrona-7.webp.asset.json";
+import img8 from "@/assets/poltrona-8.webp.asset.json";
+import nossaLojaVideo from "@/assets/poltrona-video.mp4.asset.json";
+import { trackInitiateCheckout } from "@/lib/meta-pixel";
+import { redirectWithParams } from "@/lib/redirect-with-params";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Poltrona Sofá Inflável 250kg com Puff | Casa Conforto" },
+      { name: "description", content: "Poltrona Sofá Inflável com puff, tecido aveludado anti-arranhões e suporte para até 250kg. Frete grátis hoje." },
+      { property: "og:title", content: "Poltrona Sofá Inflável 250kg com Puff" },
+      { property: "og:description", content: "Conforto aveludado, resistente a unhas de pets e suporta até 250kg." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => img.url);
+const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável 250kg com puff - foto ${i + 1}` }));
+
+const palettes = {
+  "Bege com Preto": {
+    image: allImages[0],
+    checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805",
+  },
+} as const;
+
+type PaletteName = keyof typeof palettes;
+
+const benefits = [
+  { icon: ShieldCheck, title: "Suporta 250kg", text: "Estrutura reforçada para adultos de todos os tamanhos." },
+  { icon: Sparkles, title: "Toque aveludado", text: "Superfície macia e aconchegante para relaxar." },
+  { icon: BadgeCheck, title: "Anti-arranhões", text: "Tecido resistente às unhas de gatos e cães." },
+  { icon: Clock3, title: "Pronta em minutos", text: "Enche rápido e guarda em pouco espaço." },
+];
+
+const faqs = [
+  ["O que vem no kit?", "Você recebe a Poltrona Sofá Inflável e o puff para apoiar os pés."],
+  ["Quanto peso ela aguenta?", "A poltrona suporta até 250kg, ideal para adultos."],
+  ["Quais as medidas?", "A poltrona tem 100 cm de largura, 85 cm de profundidade e 70 cm de altura. O puff tem 50 cm de diâmetro."],
+  ["Meu gato pode furar?", "O tecido aveludado é reforçado e resistente a arranhões do dia a dia com pets."],
+  ["É fácil de encher?", "Sim. Enche em poucos minutos e, vazia, pode ser guardada dobrada em qualquer canto."],
+];
+
+function useCountdown() {
+  const [seconds, setSeconds] = useState(1 * 3600);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setSeconds((value) => (value > 0 ? value - 1 : 0)), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return {
+    hours: Math.floor(seconds / 3600),
+    minutes: Math.floor((seconds % 3600) / 60),
+    seconds: seconds % 60,
+  };
+}
+
+function Countdown({ compact = false }: { compact?: boolean }) {
+  const time = useCountdown();
+  const values = [
+    [time.hours, "HORAS"],
+    [time.minutes, "MIN"],
+    [time.seconds, "SEG"],
+  ] as const;
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className={compact ? "flex items-center gap-2" : "flex items-start gap-3"}>
+      {values.map(([value, label]) => (
+        <div key={label} className="text-center">
+          <span className={compact ? "count-chip-small" : "count-chip"}>
+            {String(value).padStart(2, "0")}
+          </span>
+          {!compact && <span className="mt-1 block text-[9px] font-semibold text-muted-foreground">{label}</span>}
+        </div>
+      ))}
     </div>
+  );
+}
+
+function BuyButton({ checkout, className = "" }: { checkout: string; className?: string }) {
+  return (
+    <Button
+      size="lg"
+      className={`buy-pulse h-14 w-full rounded-md bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
+      onClick={() => {
+        trackInitiateCheckout();
+        redirectWithParams(checkout);
+      }}
+    >
+      COMPRAR AGORA <ChevronRight className="size-5" />
+    </Button>
+  );
+}
+
+function Gallery({ palette }: { palette: PaletteName }) {
+  const [active, setActive] = useState(0);
+  const paletteImage = palettes[palette].image;
+
+  useEffect(() => setActive(0), [palette]);
+  const previous = () => setActive((active - 1 + gallery.length) % gallery.length);
+  const next = () => setActive((active + 1) % gallery.length);
+  const activeImage = active === 0
+    ? { src: paletteImage, alt: "Poltrona Sofá Inflável 250kg com puff" }
+    : gallery[active] ?? gallery[0];
+
+  if (!activeImage) return null;
+
+  return (
+    <div className="min-w-0">
+      <div className="relative aspect-square overflow-hidden rounded-xl bg-muted shadow-product">
+        <span className="absolute left-3 top-3 z-10 rounded-md bg-offer px-3 py-1 text-[10px] font-extrabold uppercase text-offer-foreground">250 KG!</span>
+        <img src={activeImage.src} alt={activeImage.alt} className="h-full w-full object-cover" />
+        <Button variant="ghost" size="icon" className="gallery-arrow left-3" onClick={previous} aria-label="Imagem anterior">
+          <ChevronLeft />
+        </Button>
+        <Button variant="ghost" size="icon" className="gallery-arrow right-3" onClick={next} aria-label="Próxima imagem">
+          <ChevronRight />
+        </Button>
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2 sm:grid-cols-7 lg:grid-cols-6">
+        {[{ src: paletteImage, alt: `Paleta ${palette}` }, ...gallery.slice(1, 6)].map((image, index) => (
+          <button
+            key={image.src}
+            onClick={() => setActive(index)}
+            aria-label={`Ver imagem ${index + 1}`}
+            className={`aspect-square overflow-hidden rounded-md border-2 bg-muted transition ${active === index ? "border-primary" : "border-transparent opacity-85 hover:opacity-100"}`}
+          >
+            <img src={image.src} alt="" className="h-full w-full object-cover" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NossaLojaPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [mutedStart, setMutedStart] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {
+      video.muted = true;
+      setMutedStart(true);
+      video.play().catch(() => {});
+    });
+  }, []);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.muted = false;
+      setMutedStart(false);
+      void video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  return (
+    <div className="rounded-lg bg-player p-4 text-player-foreground shadow-product sm:col-span-2 lg:col-span-4">
+      <p className="text-center font-serif text-2xl tracking-[0.3em]">VEJA EM AÇÃO</p>
+      <p className="mt-1 text-center text-xs text-player-muted">Você tem 7 dias para trocas ou devoluções.</p>
+      <div className="relative mt-4 overflow-hidden rounded-md bg-player">
+        <video
+          ref={videoRef}
+          src={nossaLojaVideo.url}
+          className="mx-auto block max-h-[70vh] w-full cursor-pointer"
+          loop
+          playsInline
+          onClick={togglePlay}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          aria-label="Vídeo da poltrona inflável"
+        />
+        {mutedStart && isPlaying && (
+          <button
+            onClick={() => {
+              const video = videoRef.current;
+              if (!video) return;
+              video.muted = false;
+              setMutedStart(false);
+            }}
+            aria-label="Ativar som do vídeo"
+            className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-player-foreground/90 px-4 py-2 text-xs font-extrabold text-player"
+          >
+            <Volume2 className="size-4" /> ATIVAR SOM
+          </button>
+        )}
+        {!isPlaying && (
+          <button
+            onClick={togglePlay}
+            aria-label="Reproduzir vídeo"
+            className="absolute inset-0 grid place-items-center bg-player/45"
+          >
+            <span className="grid size-16 place-items-center rounded-full bg-card text-foreground shadow-lg">
+              <Play className="size-7 fill-current" />
+            </span>
+          </button>
+        )}
+        {isPlaying && (
+          <button
+            onClick={togglePlay}
+            aria-label="Pausar vídeo"
+            className="absolute bottom-3 right-3 grid size-10 place-items-center rounded-full bg-player-foreground/90 text-player opacity-80 transition hover:opacity-100"
+          >
+            <Pause className="size-5 fill-current" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPalette: (palette: PaletteName) => void }) {
+  return (
+    <section id="comprar" className="min-w-0">
+      <div className="flex items-center gap-2 text-sm">
+        <div className="flex gap-0.5 text-rating" aria-label="5 estrelas">
+          {[0, 1, 2, 3, 4].map((star) => <Star key={star} className="size-4 fill-current" />)}
+        </div>
+        <strong>4,9</strong><span className="text-muted-foreground">(327 avaliações)</span>
+      </div>
+      <p className="mt-5 text-[11px] font-extrabold uppercase tracking-[0.18em] text-primary">Oferta exclusiva por tempo limitado</p>
+      <h1 className="mt-4 max-w-xl text-[30px] font-extrabold leading-[1.17] text-foreground sm:text-[38px] lg:text-[40px]">
+        Poltrona Sofá Inflável 250kg com Puff — Aveludada e Anti-Arranhões
+      </h1>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">Poltrona + puff de apoio para os pés. Conforto aveludado para sala e quarto, resistente às unhas dos pets.</p>
+
+      <div className="mt-5 border-y border-border py-4">
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+          <span className="line-through">R$ 399,90</span>
+          <span className="rounded bg-discount px-2 py-1 text-[10px] font-bold text-primary">63% OFF</span>
+        </div>
+        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">R$ 147,90</strong></div>
+      </div>
+
+      <div className="offer-pulse mt-4 rounded-md bg-offer px-4 py-3 text-offer-foreground">
+        <p className="flex items-center gap-2 text-xs font-extrabold"><Gift className="size-4" /> PUFF DE BRINDE — SÓ HOJE!</p>
+        <p className="ml-6 mt-1 text-[11px]">Leve a poltrona e ganhe o puff para apoiar os pés.</p>
+      </div>
+      <div className="urgency-pulse mt-2 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
+
+      <fieldset className="mt-5">
+        <legend className="mb-2 text-xs font-bold">Cor</legend>
+        <div className="grid grid-cols-2 gap-2">
+          {(Object.keys(palettes) as PaletteName[]).map((name) => (
+            <Button key={name} variant="outline" onClick={() => setPalette(name)} className={palette === name ? "h-10 border-primary bg-selected text-xs shadow-none hover:bg-selected" : "h-10 text-xs shadow-none"}>
+              {palette === name && <Check className="size-4" />} {name}
+            </Button>
+          ))}
+        </div>
+      </fieldset>
+
+      <div className="mt-4 grid grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-lg border border-border p-3">
+        <img src="/images/correios-logo.png" alt="Correios" className="h-12 w-16 object-contain" />
+        <div className="min-w-0"><span className="text-[10px] uppercase text-muted-foreground">Oferta adicional</span><p className="text-xs font-extrabold text-primary">FRETE GRÁTIS SOMENTE HOJE</p></div>
+      </div>
+      <BuyButton checkout={palettes[palette].checkout} className="mt-3" />
+      <p className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground"><LockKeyhole className="size-3.5" /> Compra segura e protegida</p>
+    </section>
+  );
+}
+
+function Index() {
+  const [palette, setPalette] = useState<PaletteName>("Bege com Preto");
+  const checkout = palettes[palette].checkout;
+  const assuranceItems: Array<[LucideIcon, string, string]> = [
+    [Truck, "Envio rápido", "para todo Brasil"],
+    [ShieldCheck, "Compra segura", "dados protegidos"],
+    [PackageCheck, "7 dias", "para experimentar"],
+  ];
+
+  return (
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="bg-banner text-banner-foreground">
+        <div className="page-shell flex min-h-8 items-center justify-center gap-4 px-4 py-1 text-center text-[10px] font-extrabold uppercase">
+          <span>Promoção especial • Puff de brinde + frete grátis</span><Countdown compact />
+        </div>
+      </div>
+      <header className="border-b border-border bg-nav">
+        <div className="page-shell flex h-[62px] items-center justify-center px-5">
+          <a href="#top" className="font-serif text-xl tracking-[0.35em] text-primary">CASA CONFORTO</a>
+        </div>
+      </header>
+
+      <div id="top" className="page-shell grid gap-10 px-5 py-10 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:py-12">
+        <Gallery palette={palette} /><ProductDetails palette={palette} setPalette={setPalette} />
+      </div>
+
+      <section className="border-y border-border bg-soft py-2">
+        <div className="page-shell grid grid-cols-3 gap-1 px-3">
+          {assuranceItems.map(([Icon, title, text]) => (
+            <div key={title} className="flex min-w-0 items-center justify-center gap-1.5 py-1"><Icon className="size-4 shrink-0 text-primary" /><p className="text-[9px] leading-tight sm:text-[11px]"><strong className="block">{title}</strong><span className="text-muted-foreground">{text}</span></p></div>
+          ))}
+        </div>
+      </section>
+
+      <section id="kit" className="bg-soft py-16">
+        <div className="page-shell px-5">
+          <p className="section-kicker text-center">Qualidade em cada detalhe</p>
+          <h2 className="section-title text-center">Feita para o seu descanso</h2>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <NossaLojaPlayer />
+            {allImages.slice(1).map((src, i) => <img key={src} src={src} alt={`Detalhe da poltrona inflável ${i + 2}`} className="aspect-square w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
+          </div>
+        </div>
+      </section>
+
+      <section id="beneficios" className="page-shell px-5 py-16 text-center">
+        <p className="section-kicker">Conforto e resistência</p><h2 className="section-title">O canto de relaxar que sua casa merece</h2>
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {benefits.map(({ icon: Icon, title, text }) => <article key={title}><div className="mx-auto grid size-12 place-items-center rounded-full bg-selected text-primary"><Icon className="size-6" /></div><h3 className="mt-4 text-base font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
+        </div>
+      </section>
+
+      <section id="duvidas" className="bg-soft py-16">
+        <div className="mx-auto max-w-2xl px-5"><p className="section-kicker text-center">Tire suas dúvidas</p><h2 className="section-title text-center">Perguntas frequentes</h2>
+          <Accordion type="single" collapsible className="mt-8 rounded-lg border border-border bg-card px-5">
+            {faqs.map(([question, answer], index) => <AccordionItem value={`faq-${index}`} key={question}><AccordionTrigger className="py-5 text-left text-sm font-bold hover:no-underline">{question}</AccordionTrigger><AccordionContent className="text-muted-foreground">{answer}</AccordionContent></AccordionItem>)}
+          </Accordion>
+        </div>
+      </section>
+
+      <section className="bg-final py-16 text-final-foreground">
+        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff de brinde por apenas R$ 147,90.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
+      </section>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 backdrop-blur sm:hidden">
+        <BuyButton checkout={checkout} />
+      </div>
+    </main>
   );
 }
