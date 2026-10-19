@@ -5,6 +5,7 @@
 - [x] Fotos na proporção correta (retrato, preenchendo o cartão sem bordas brancas)
 - [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane
 - [x] Imagem "3 meses" da copy trocada pela nova (cama-3-meses.png, sem o texto do pet)
+- [x] 1ª imagem da copy trocada pela arte "SUPORTA ATÉ 250 KG!" (puff-reforcado-250kg.png)
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
