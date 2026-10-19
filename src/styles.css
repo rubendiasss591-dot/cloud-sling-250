@@ -49,12 +49,16 @@
   --color-player: var(--player);
   --color-player-foreground: var(--player-foreground);
   --color-player-muted: var(--player-muted);
+  --color-puff-blue: var(--puff-blue);
+  --color-puff-taupe: var(--puff-taupe);
   --shadow-product: var(--shadow-product);
   --shadow-buy: var(--shadow-buy);
 }
 
 :root {
   --radius: 0.55rem;
+  --puff-blue: #5c6b86;
+  --puff-taupe: #706761;
   --background: oklch(0.975 0.008 80);
   --foreground: oklch(0.17 0.01 60);
   --card: oklch(1 0 0);

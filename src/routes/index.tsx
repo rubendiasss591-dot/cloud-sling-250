@@ -47,6 +47,7 @@ import review3Asset from "@/assets/review-3.jpg.asset.json";
 import review4Asset from "@/assets/review-4.jpg.asset.json";
 import review5Asset from "@/assets/review-5.jpg.asset.json";
 import review6Asset from "@/assets/review-6.jpg.asset.json";
+import sofaComPuff from "@/assets/sofa-com-puff.webp.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
@@ -64,7 +65,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => img.url);
+const allImages = [img1, sofaComPuff, img2, img3, img4, img5, img6, img7, img8].map((img) => img.url);
 const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável com puff - foto ${i + 1}` }));
 
 const palettes = {
@@ -74,6 +75,13 @@ const palettes = {
 } as const;
 
 type PaletteName = keyof typeof palettes;
+
+const puffColors = [
+  { name: "Azul", swatch: "bg-puff-blue", image: sofaComPuff.url },
+  { name: "Cinza", swatch: "bg-puff-taupe", image: img1.url },
+] as const;
+
+type ColorName = (typeof puffColors)[number]["name"];
 
 const benefits = [
   { icon: ShieldCheck, title: "Suporta 250kg", text: "Estrutura reforçada para adultos de todos os tamanhos." },
