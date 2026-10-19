@@ -150,17 +150,17 @@ function BuyButton({ checkout, className = "" }: { checkout: string; className?:
   );
 }
 
-function Gallery({ palette }: { palette: PaletteName }) {
+function Gallery({ palette, color }: { palette: PaletteName; color: ColorName }) {
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false });
-  const paletteImage = palettes[palette].image;
-  const slides = [{ src: paletteImage, alt: "Poltrona Sofá Inflável com puff" }, ...gallery.slice(1)];
+  const colorImage = puffColors.find((option) => option.name === color)?.image ?? palettes[palette].image;
+  const slides = [{ src: colorImage, alt: `Poltrona Sofá Inflável com puff na cor ${color}` }, ...gallery.filter((image) => image.src !== colorImage)];
 
   useEffect(() => {
     setActive(0);
     trackRef.current?.scrollTo({ left: 0 });
-  }, [palette]);
+  }, [palette, color]);
 
   const updateActive = () => {
     const track = trackRef.current;
@@ -462,7 +462,7 @@ function LiveScarcity() {
   );
 }
 
-function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPalette: (palette: PaletteName) => void }) {
+function ProductDetails({ palette, setPalette, color, setColor }: { palette: PaletteName; setPalette: (palette: PaletteName) => void; color: ColorName; setColor: (color: ColorName) => void }) {
   return (
     <section id="comprar" className="min-w-0">
       <div className="flex items-center gap-2 text-sm">
@@ -485,6 +485,23 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
           <span className="h-px flex-1 bg-border" />
           <legend className="text-xs font-extrabold uppercase tracking-wider">Escolha seu kit</legend>
           <span className="h-px flex-1 bg-border" />
+        </div>
+        <div className="mb-4 flex items-center gap-2">
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">Cor</span>
+          {puffColors.map((option) => {
+            const active = color === option.name;
+            return (
+              <button
+                key={option.name}
+                type="button"
+                onClick={() => setColor(option.name)}
+                aria-label={`Selecionar a cor ${option.name}`}
+                aria-pressed={active}
+                className={`size-5 rounded-full transition ${option.swatch} ${active ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : "opacity-60 hover:opacity-100"}`}
+              />
+            );
+          })}
+          <span className="ml-1 text-[11px] font-semibold text-muted-foreground">{color}</span>
         </div>
         <div className="flex flex-col gap-3">
           {(Object.keys(palettes) as PaletteName[]).map((name, i) => {
@@ -535,6 +552,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
 
 function Index() {
   const [palette, setPalette] = useState<PaletteName>("2 Puffs");
+  const [color, setColor] = useState<ColorName>("Cinza");
   const checkout = palettes[palette].checkout;
   const assuranceItems: Array<[LucideIcon, string, string]> = [
     [Truck, "Envio rápido", "para todo Brasil"],
@@ -551,12 +569,12 @@ function Index() {
       </div>
       <header className="border-b border-border bg-nav">
         <div className="page-shell flex h-[62px] items-center justify-center px-5">
-          <a href="#top" className="font-serif text-xl tracking-[0.35em] text-primary">CASA CONFORTO</a>
+          <a href="#top" className="font-serif text-lg tracking-[0.22em] text-primary">SERENA HOME SHOP</a>
         </div>
       </header>
 
       <div id="top" className="page-shell grid gap-10 px-5 py-10 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:py-12">
-        <Gallery palette={palette} /><ProductDetails palette={palette} setPalette={setPalette} />
+        <Gallery palette={palette} color={color} /><ProductDetails palette={palette} setPalette={setPalette} color={color} setColor={setColor} />
       </div>
 
       <section className="border-y border-border bg-soft py-2">
