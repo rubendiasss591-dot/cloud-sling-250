@@ -13,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { metaPixelScript, META_PIXEL_ID } from "../lib/meta-pixel";
-import { utmScript, utmScript2 } from "../lib/utm-script";
+import { utmScript } from "../lib/utm-script";
 import { redirectWithParams, redirectWithParamsScript } from "../lib/redirect-with-params";
 import { Button } from "@/components/ui/button";
 
@@ -106,7 +106,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { type: "text/javascript", children: redirectWithParamsScript },
       { type: "text/javascript", children: metaPixelScript },
       { type: "text/javascript", children: utmScript },
-      { type: "text/javascript", children: utmScript2 },
     ],
   }),
   shellComponent: RootShell,
