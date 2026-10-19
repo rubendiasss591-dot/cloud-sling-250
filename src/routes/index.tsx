@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
-  Gift,
   LockKeyhole,
   PackageCheck,
   Pause,
@@ -56,10 +55,10 @@ const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => 
 const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável 250kg com puff - foto ${i + 1}` }));
 
 const palettes = {
-  "Bege com Preto": {
-    image: allImages[0],
-    checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805",
-  },
+  "1 Puff": { image: allImages[0], old: "R$ 399,90", price: "R$ 147,90", off: "63% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "2 Puffs": { image: allImages[0], old: "R$ 799,80", price: "R$ 259,90", off: "67% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "4 Puffs": { image: allImages[0], old: "R$ 1.599,60", price: "R$ 479,90", off: "70% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "6 Puffs": { image: allImages[0], old: "R$ 2.399,40", price: "R$ 659,90", off: "73% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
 } as const;
 
 type PaletteName = keyof typeof palettes;
@@ -120,13 +119,13 @@ function BuyButton({ checkout, className = "" }: { checkout: string; className?:
   return (
     <Button
       size="lg"
-      className={`buy-pulse h-14 w-full rounded-md bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
+      className={`buy-pulse h-16 w-full rounded-full uppercase tracking-wide bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
       onClick={() => {
         trackInitiateCheckout();
         redirectWithParams(checkout);
       }}
     >
-      COMPRAR AGORA <ChevronRight className="size-5" />
+      <LockKeyhole className="size-5" /> Comprar agora <ChevronRight className="size-5" />
     </Button>
   );
 }
@@ -264,27 +263,22 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
         <strong>4,9</strong><span className="text-muted-foreground">(327 avaliações)</span>
       </div>
       <p className="mt-5 text-[11px] font-extrabold uppercase tracking-[0.18em] text-primary">Oferta exclusiva por tempo limitado</p>
-      <h1 className="mt-4 max-w-xl text-[30px] font-extrabold leading-[1.17] text-foreground sm:text-[38px] lg:text-[40px]">
+      <h1 className="mt-4 max-w-xl text-[22px] font-extrabold leading-[1.2] text-foreground sm:text-[26px]">
         Poltrona Sofá Inflável 250kg com Puff — Aveludada e Anti-Arranhões
       </h1>
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">Poltrona + puff de apoio para os pés. Conforto aveludado para sala e quarto, resistente às unhas dos pets.</p>
 
       <div className="mt-5 border-y border-border py-4">
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <span className="line-through">R$ 399,90</span>
-          <span className="rounded bg-discount px-2 py-1 text-[10px] font-bold text-primary">63% OFF</span>
+          <span className="line-through">{palettes[palette].old}</span>
+          <span className="offer-pulse rounded bg-price px-2 py-1 text-[10px] font-extrabold text-buy-foreground">{palettes[palette].off}</span>
         </div>
-        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">R$ 147,90</strong></div>
+        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">{palettes[palette].price}</strong></div>
       </div>
 
-      <div className="offer-pulse mt-4 rounded-md bg-offer px-4 py-3 text-offer-foreground">
-        <p className="flex items-center gap-2 text-xs font-extrabold"><Gift className="size-4" /> PUFF DE BRINDE — SÓ HOJE!</p>
-        <p className="ml-6 mt-1 text-[11px]">Leve a poltrona e ganhe o puff para apoiar os pés.</p>
-      </div>
-      <div className="urgency-pulse mt-2 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
+      <div className="urgency-pulse mt-4 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
 
       <fieldset className="mt-5">
-        <legend className="mb-2 text-xs font-bold">Cor</legend>
+        <legend className="mb-2 text-xs font-bold">Escolha a quantidade</legend>
         <div className="grid grid-cols-2 gap-2">
           {(Object.keys(palettes) as PaletteName[]).map((name) => (
             <Button key={name} variant="outline" onClick={() => setPalette(name)} className={palette === name ? "h-10 border-primary bg-selected text-xs shadow-none hover:bg-selected" : "h-10 text-xs shadow-none"}>
@@ -365,7 +359,7 @@ function Index() {
       </section>
 
       <section className="bg-final py-16 text-final-foreground">
-        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff de brinde por apenas R$ 147,90.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
+        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff de brinde a partir de R$ 147,90.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
       </section>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 backdrop-blur sm:hidden">
         <BuyButton checkout={checkout} />
