@@ -14,7 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { metaPixelScript, META_PIXEL_ID } from "../lib/meta-pixel";
 import { utmScript } from "../lib/utm-script";
-import { redirectWithParams, redirectWithParamsScript } from "../lib/redirect-with-params";
+import { redirectWithParamsScript } from "../lib/redirect-with-params";
 import { Button } from "@/components/ui/button";
 
 
@@ -29,7 +29,7 @@ function NotFoundComponent() {
         </p>
         <div className="mt-6">
           <Button
-            onClick={() => redirectWithParams("/")}
+            onClick={() => window.redirectWithParams("/")}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Go home
@@ -68,7 +68,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           </button>
           <Button
             variant="outline"
-            onClick={() => redirectWithParams("/")}
+            onClick={() => window.redirectWithParams("/")}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             Go home

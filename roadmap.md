@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Feito nesta rodada
+- [ ] Centralizar todas as saídas na função global redirectWithParams e verificar parâmetros intactos, sem alterar regras ou etapas
 - [x] Prova social: foto nos 2 comentários que estavam sem foto
 - [x] Fotos na proporção correta (retrato, preenchendo o cartão sem bordas brancas)
 - [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane

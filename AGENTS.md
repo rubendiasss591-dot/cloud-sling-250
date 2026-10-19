@@ -12,3 +12,4 @@
 - Keep the product testimonial in a dedicated SocialProof component immediately after the guarantee video; this preserves the requested content order independently of the product image sequence.
 
 - Load UTMify once through root head metadata, separately from Meta Pixel initialization; duplicate loaders can repeat attribution handling.
+- All application redirects must call the global window.redirectWithParams installed from the single canonical function in root head and standalone error pages; this preserves the current raw query string without changing business logic. In-page scrolling must not perform URL navigation.

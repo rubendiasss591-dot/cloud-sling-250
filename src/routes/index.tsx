@@ -49,7 +49,6 @@ import review5Asset from "@/assets/review-5.jpg.asset.json";
 import review6Asset from "@/assets/review-6.jpg.asset.json";
 import sofaComPuff from "@/assets/sofa-com-puff.webp.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
-import { redirectWithParams } from "@/lib/redirect-with-params";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -142,7 +141,7 @@ function BuyButton({ checkout, className = "" }: { checkout: string; className?:
       className={`buy-pulse h-16 w-full rounded-md uppercase tracking-wide bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
       onClick={() => {
         trackInitiateCheckout();
-        redirectWithParams(checkout);
+        window.redirectWithParams(checkout);
       }}
     >
       <LockKeyhole className="size-5" /> Comprar agora <ChevronRight className="size-5" />
@@ -584,7 +583,7 @@ function Index() {
       </div>
       <header className="border-b border-border bg-nav">
         <div className="page-shell flex h-[62px] items-center justify-center px-5">
-          <a href="#top" className="font-serif text-lg tracking-[0.22em] text-primary">SERENA HOME SHOP</a>
+          <Button variant="link" onClick={() => document.getElementById("top")?.scrollIntoView()} className="h-auto p-0 font-serif text-lg tracking-[0.22em] text-primary hover:no-underline">SERENA HOME SHOP</Button>
         </div>
       </header>
 
