@@ -463,6 +463,11 @@ function LiveScarcity() {
 }
 
 function ProductDetails({ palette, setPalette, color, setColor }: { palette: PaletteName; setPalette: (palette: PaletteName) => void; color: ColorName; setColor: (color: ColorName) => void }) {
+  const [unitColors, setUnitColors] = useState<ColorName[]>(() => Array(4).fill(color));
+  const pickUnit = (u: number, c: ColorName) => {
+    setUnitColors((prev) => prev.map((v, k) => (k === u ? c : v)));
+    setColor(c);
+  };
   return (
     <section id="comprar" className="min-w-0">
       <div className="flex items-center gap-2 text-sm">
@@ -486,46 +491,32 @@ function ProductDetails({ palette, setPalette, color, setColor }: { palette: Pal
           <legend className="text-xs font-extrabold uppercase tracking-wider">Escolha seu kit</legend>
           <span className="h-px flex-1 bg-border" />
         </div>
-        <div className="mb-4 flex items-center gap-2">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">Cor</span>
-          {puffColors.map((option) => {
-            const active = color === option.name;
-            return (
-              <button
-                key={option.name}
-                type="button"
-                onClick={() => setColor(option.name)}
-                aria-label={`Selecionar a cor ${option.name}`}
-                aria-pressed={active}
-                className={`size-5 rounded-full transition ${option.swatch} ${active ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : "opacity-60 hover:opacity-100"}`}
-              />
-            );
-          })}
-          <span className="ml-1 text-[11px] font-semibold text-muted-foreground">{color}</span>
-        </div>
         <div className="flex flex-col gap-3">
           {(Object.keys(palettes) as PaletteName[]).map((name, i) => {
             const opt = palettes[name];
             const selected = palette === name;
             const badge = i === 1 ? "🔥 MELHOR OPÇÃO" : null;
+            const units = parseInt(name, 10);
             return (
-              <button
+              <div
                 key={name}
-                type="button"
+                role="radio"
+                aria-checked={selected}
+                tabIndex={0}
                 onClick={() => setPalette(name)}
-                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "py-6 scale-[1.03] " : ""}${selected ? "border-banner bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setPalette(name); } }}
+                className={`relative cursor-pointer rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "py-6 scale-[1.03] " : ""}${selected ? "border-banner bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
                   <span className="absolute -top-2.5 right-4 rounded-full bg-banner px-3 py-1 text-[11px] font-extrabold tracking-wider text-banner-foreground">{badge}</span>
                 )}
-
+                <div className="flex items-center gap-3">
                 <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-primary" : "border-muted-foreground"}`}>
                   {selected && <span className="size-2.5 rounded-full bg-primary" />}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-2">
                     <strong className={selected ? "text-base" : "text-sm"}>{name}</strong>
-
                     <span className="rounded bg-discount px-1.5 py-0.5 text-[9px] font-extrabold text-price">ECONOMIZE {opt.off.replace(" OFF", "")}</span>
                   </span>
                   <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
@@ -534,7 +525,31 @@ function ProductDetails({ palette, setPalette, color, setColor }: { palette: Pal
                   <strong className={`block font-extrabold text-price ${selected ? "text-xl" : "text-base"}`}>{opt.price}</strong>
                   <span className="block text-[11px] text-muted-foreground line-through">{opt.old}</span>
                 </span>
-              </button>
+                </div>
+                {selected && (
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-border pt-3 pl-8">
+                    {Array.from({ length: units }).map((_, u) => (
+                      <div key={u} className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-bold text-muted-foreground">#{u + 1}</span>
+                        {puffColors.map((option) => {
+                          const active = unitColors[u] === option.name;
+                          return (
+                            <button
+                              key={option.name}
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); pickUnit(u, option.name); }}
+                              aria-label={`Puff ${u + 1}: cor ${option.name}`}
+                              aria-pressed={active}
+                              className={`size-4 rounded-full transition ${option.swatch} ${active ? "ring-2 ring-banner ring-offset-1 ring-offset-background" : "opacity-60 hover:opacity-100"}`}
+                            />
+                          );
+                        })}
+                        <span className="text-[10px] font-semibold text-muted-foreground">{unitColors[u]}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
