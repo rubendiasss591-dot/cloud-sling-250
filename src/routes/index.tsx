@@ -217,7 +217,7 @@ function NossaLojaPlayer() {
           onClick={togglePlay}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          aria-label="Vídeo da poltrona inflável"
+          aria-label="Vídeo de confiança e garantia da poltrona inflável"
         />
         {mutedStart && isPlaying && (
           <button
@@ -403,7 +403,13 @@ function Index() {
           <h2 className="section-title text-center">Feita para o seu descanso</h2>
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <NossaLojaPlayer />
-            {allImages.slice(1).map((src, i) => <img key={src} src={src} alt={`Detalhe da poltrona inflável ${i + 2}`} className="aspect-square w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
+            {[
+              { src: puff250kg.url, alt: "Puff reforçado que suporta até 250 kg" },
+              { src: puffPets.url, alt: "Puff resistente para pets felizes" },
+              { src: puffLavavel.url, alt: "Puff pet lavável e impermeável" },
+              { src: infograficoEncher.url, alt: "Infográfico de como encher a almofada inflável" },
+              { src: conforto3Meses.url, alt: "Conforto que dura por até 3 meses" },
+            ].map((image) => <img key={image.src} src={image.src} alt={image.alt} className="aspect-[9/16] w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
           </div>
         </div>
       </section>
