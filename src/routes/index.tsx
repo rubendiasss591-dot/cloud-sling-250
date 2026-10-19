@@ -47,6 +47,7 @@ import review2Asset from "@/assets/review-2.jpg.asset.json";
 import review3Asset from "@/assets/review-3.jpg.asset.json";
 import review4Asset from "@/assets/review-4.jpg.asset.json";
 import review5Asset from "@/assets/review-5.jpg.asset.json";
+import review6Asset from "@/assets/review-6.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
