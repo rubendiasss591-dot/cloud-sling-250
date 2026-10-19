@@ -528,6 +528,7 @@ function ProductDetails({ palette, setPalette, color, setColor }: { palette: Pal
                 </div>
                 {selected && (
                   <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-border pt-3 pl-8">
+                    <span className="w-full text-[9px] font-bold uppercase tracking-wide text-muted-foreground">Selecione as cores do puff</span>
                     {Array.from({ length: units }).map((_, u) => (
                       <div key={u} className="flex items-center gap-1.5">
                         <span className="text-[10px] font-bold text-muted-foreground">#{u + 1}</span>
