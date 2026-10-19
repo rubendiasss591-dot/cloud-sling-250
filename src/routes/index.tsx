@@ -306,7 +306,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                     <strong className="text-sm">{name}</strong>
                     <span className="rounded bg-discount px-1.5 py-0.5 text-[9px] font-extrabold text-price">ECONOMIZE {opt.off.replace(" OFF", "")}</span>
                   </span>
-                  <span className="mt-0.5 block text-[11px] text-muted-foreground">Poltrona inflável + puff</span>
+                  <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
                 </span>
                 <span className="text-right">
                   <strong className="block text-base text-price">{opt.price}</strong>
