@@ -5,6 +5,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
+  Flame,
   LockKeyhole,
   PackageCheck,
   Pause,
@@ -287,7 +288,12 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
           {(Object.keys(palettes) as PaletteName[]).map((name, i) => {
             const opt = palettes[name];
             const selected = palette === name;
-            const badge = i === 1 ? "MAIS VENDIDO" : i === 3 ? "MELHOR OFERTA" : null;
+            const badge = i === 1
+              ? { label: "MELHOR OPÇÃO", icon: Flame }
+              : i === 3
+                ? { label: "MELHOR OFERTA", icon: null }
+                : null;
+            const BadgeIcon = badge?.icon;
             return (
               <button
                 key={name}
@@ -296,7 +302,10 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                 className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "border-price bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
-                  <span className="absolute -top-2.5 right-4 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
+                  <span className="absolute -top-2.5 right-4 flex items-center gap-1 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">
+                    {BadgeIcon && <BadgeIcon className="size-3 fill-current" />}
+                    {badge.label}
+                  </span>
                 )}
                 <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-price" : "border-muted-foreground"}`}>
                   {selected && <span className="size-2.5 rounded-full bg-price" />}
@@ -309,7 +318,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                   <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
                 </span>
                 <span className="text-right">
-                  <strong className="block text-base text-price">{opt.price}</strong>
+                  <strong className="block text-base font-extrabold text-foreground">{opt.price}</strong>
                   <span className="block text-[11px] text-muted-foreground line-through">{opt.old}</span>
                 </span>
               </button>
