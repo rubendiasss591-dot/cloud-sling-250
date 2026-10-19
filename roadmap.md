@@ -6,6 +6,9 @@
 - [x] Nova foto enviada (poltrona montada na sala) usada na avaliação da Cristiane
 - [x] Imagem "3 meses" da copy trocada pela nova (cama-3-meses.png, sem o texto do pet)
 - [x] 1ª imagem da copy trocada pela arte "SUPORTA ATÉ 250 KG!" (puff-reforcado-250kg.png)
+- [x] Bolinhas de cor (Azul #5C6B86 / Cinza #706761) na parte dos bundles, trocando a foto grande
+- [x] Foto nova do sofá inflável com puff adicionada às fotos do produto
+- [x] Nome no topo da página corrigido para SERENA HOME SHOP (ainda dizia CASA CONFORTO)
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
