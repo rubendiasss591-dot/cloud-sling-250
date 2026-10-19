@@ -278,13 +278,43 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
       <div className="urgency-pulse mt-4 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
 
       <fieldset className="mt-5">
-        <legend className="mb-2 text-xs font-bold">Escolha a quantidade</legend>
-        <div className="grid grid-cols-2 gap-2">
-          {(Object.keys(palettes) as PaletteName[]).map((name) => (
-            <Button key={name} variant="outline" onClick={() => setPalette(name)} className={palette === name ? "h-10 border-primary bg-selected text-xs shadow-none hover:bg-selected" : "h-10 text-xs shadow-none"}>
-              {palette === name && <Check className="size-4" />} {name}
-            </Button>
-          ))}
+        <div className="mb-3 flex items-center gap-3">
+          <span className="h-px flex-1 bg-border" />
+          <legend className="text-xs font-extrabold uppercase tracking-wider">Escolha seu kit</legend>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+        <div className="flex flex-col gap-3">
+          {(Object.keys(palettes) as PaletteName[]).map((name, i) => {
+            const opt = palettes[name];
+            const selected = palette === name;
+            const badge = i === 1 ? "MAIS VENDIDO" : i === 3 ? "MELHOR OFERTA" : null;
+            return (
+              <button
+                key={name}
+                type="button"
+                onClick={() => setPalette(name)}
+                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "border-price bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
+              >
+                {badge && (
+                  <span className="absolute -top-2.5 right-4 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
+                )}
+                <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-price" : "border-muted-foreground"}`}>
+                  {selected && <span className="size-2.5 rounded-full bg-price" />}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex flex-wrap items-center gap-2">
+                    <strong className="text-sm">{name}</strong>
+                    <span className="rounded bg-discount px-1.5 py-0.5 text-[9px] font-extrabold text-price">ECONOMIZE {opt.off.replace(" OFF", "")}</span>
+                  </span>
+                  <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
+                </span>
+                <span className="text-right">
+                  <strong className="block text-base text-price">{opt.price}</strong>
+                  <span className="block text-[11px] text-muted-foreground line-through">{opt.old}</span>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </fieldset>
 
