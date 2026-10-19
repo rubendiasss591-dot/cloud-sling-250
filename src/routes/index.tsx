@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
-  Flame,
   LockKeyhole,
   PackageCheck,
   Pause,
@@ -58,9 +57,8 @@ const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável
 
 const palettes = {
   "1 Puff": { image: allImages[0], old: "R$ 399,90", price: "R$ 49,99", off: "88% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
-  "2 Puffs": { image: allImages[0], old: "R$ 799,80", price: "R$ 259,90", off: "67% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
-  "4 Puffs": { image: allImages[0], old: "R$ 1.599,60", price: "R$ 479,90", off: "70% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
-  "6 Puffs": { image: allImages[0], old: "R$ 2.399,40", price: "R$ 659,90", off: "73% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "2 Puffs": { image: allImages[0], old: "R$ 799,80", price: "R$ 65,90", off: "92% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "4 Puffs": { image: allImages[0], old: "R$ 1.599,60", price: "R$ 121,90", off: "92% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
 } as const;
 
 type PaletteName = keyof typeof palettes;
@@ -269,13 +267,6 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
         Poltrona Sofá Inflável 250kg com Puff — Aveludada e Anti-Arranhões
       </h1>
 
-      <div className="mt-5 border-y border-border py-4">
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <span className="line-through">{palettes[palette].old}</span>
-          <span className="offer-pulse rounded bg-price px-2 py-1 text-[10px] font-extrabold text-buy-foreground">{palettes[palette].off}</span>
-        </div>
-        <div className="mt-1 flex items-end gap-2"><span className="pb-1 text-sm text-muted-foreground">por</span><strong className="font-serif text-[34px] leading-none text-price">{palettes[palette].price}</strong></div>
-      </div>
 
       <div className="urgency-pulse mt-4 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
 
@@ -289,12 +280,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
           {(Object.keys(palettes) as PaletteName[]).map((name, i) => {
             const opt = palettes[name];
             const selected = palette === name;
-            const badge = i === 1
-              ? { label: "MELHOR OPÇÃO", icon: Flame }
-              : i === 3
-                ? { label: "MELHOR OFERTA", icon: null }
-                : null;
-            const BadgeIcon = badge?.icon;
+            const badge = i === 1 ? "🔥 MELHOR OPÇÃO" : null;
             return (
               <button
                 key={name}
@@ -303,10 +289,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                 className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "border-price bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
-                  <span className="absolute -top-2.5 right-4 flex items-center gap-1 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">
-                    {BadgeIcon && <BadgeIcon className="size-3 fill-current" />}
-                    {badge.label}
-                  </span>
+                  <span className="absolute -top-2.5 right-4 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
                 )}
                 <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-price" : "border-muted-foreground"}`}>
                   {selected && <span className="size-2.5 rounded-full bg-price" />}
