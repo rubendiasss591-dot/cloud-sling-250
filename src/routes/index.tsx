@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   BadgeCheck,
   Check,
-  ChevronLeft,
   ChevronRight,
   Clock3,
   LockKeyhole,
@@ -17,7 +16,7 @@ import {
   Volume2,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 import {
   Accordion,
@@ -36,7 +35,7 @@ import img7 from "@/assets/poltrona-7.webp.asset.json";
 import img8 from "@/assets/poltrona-8.webp.asset.json";
 import garantiaVideo from "@/assets/garantia-video.mp4.asset.json";
 import poltronaVideo from "@/assets/poltrona-video.mp4.asset.json";
-import puff250kg from "@/assets/puff-250kg.png.asset.json";
+import puffReforcado from "@/assets/puff-reforcado.png.asset.json";
 import puffPets from "@/assets/puff-pets.png.asset.json";
 import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
@@ -54,7 +53,7 @@ import { redirectWithParams } from "@/lib/redirect-with-params";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Poltrona Sofá Inflável 250kg com Puff | Casa Conforto" },
+      { title: "Poltrona Sofá Inflável 250kg com Puff | Serena Home Shop" },
       { name: "description", content: "Poltrona Sofá Inflável com puff, tecido aveludado anti-arranhões e suporte para até 250kg. Frete grátis hoje." },
       { property: "og:title", content: "Poltrona Sofá Inflável 250kg com Puff" },
       { property: "og:description", content: "Conforto aveludado, resistente a unhas de pets e suporta até 250kg." },
@@ -66,7 +65,7 @@ export const Route = createFileRoute("/")({
 });
 
 const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => img.url);
-const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável 250kg com puff - foto ${i + 1}` }));
+const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável com puff - foto ${i + 1}` }));
 
 const palettes = {
   "1 Puff": { image: allImages[0], old: "R$ 399,90", price: "R$ 49,99", off: "88% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
@@ -145,38 +144,87 @@ function BuyButton({ checkout, className = "" }: { checkout: string; className?:
 
 function Gallery({ palette }: { palette: PaletteName }) {
   const [active, setActive] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false });
   const paletteImage = palettes[palette].image;
+  const slides = [{ src: paletteImage, alt: "Poltrona Sofá Inflável com puff" }, ...gallery.slice(1)];
 
-  useEffect(() => setActive(0), [palette]);
-  const previous = () => setActive((active - 1 + gallery.length) % gallery.length);
-  const next = () => setActive((active + 1) % gallery.length);
-  const activeImage = active === 0
-    ? { src: paletteImage, alt: "Poltrona Sofá Inflável 250kg com puff" }
-    : gallery[active] ?? gallery[0];
+  useEffect(() => {
+    setActive(0);
+    trackRef.current?.scrollTo({ left: 0 });
+  }, [palette]);
 
-  if (!activeImage) return null;
+  const updateActive = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const index = Math.round(track.scrollLeft / track.clientWidth);
+    setActive(Math.min(slides.length - 1, Math.max(0, index)));
+  };
+
+  const goTo = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollTo({ left: index * track.clientWidth, behavior: "smooth" });
+  };
+
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || event.pointerType !== "mouse") return;
+    dragState.current = { startX: event.clientX, scrollLeft: track.scrollLeft, dragging: true };
+    track.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || !dragState.current.dragging) return;
+    track.scrollLeft = dragState.current.scrollLeft - (event.clientX - dragState.current.startX);
+  };
+
+  const endDrag = () => {
+    dragState.current.dragging = false;
+  };
 
   return (
     <div className="min-w-0">
-      <div className="relative aspect-square overflow-hidden rounded-xl bg-muted shadow-product">
-        <span className="absolute left-3 top-3 z-10 rounded-md bg-offer px-3 py-1 text-[10px] font-extrabold uppercase text-offer-foreground">250 KG!</span>
-        <img src={activeImage.src} alt={activeImage.alt} className="h-full w-full object-cover" />
-        <Button variant="ghost" size="icon" className="gallery-arrow left-3" onClick={previous} aria-label="Imagem anterior">
-          <ChevronLeft />
-        </Button>
-        <Button variant="ghost" size="icon" className="gallery-arrow right-3" onClick={next} aria-label="Próxima imagem">
-          <ChevronRight />
-        </Button>
+      <div
+        ref={trackRef}
+        onScroll={updateActive}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        className="flex cursor-grab snap-x snap-mandatory overflow-x-auto rounded-xl bg-muted shadow-product [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+      >
+        {slides.map((image, index) => (
+          <img
+            key={image.src}
+            src={image.src}
+            alt={image.alt}
+            draggable={false}
+            loading={index === 0 ? "eager" : "lazy"}
+            className="aspect-square w-full shrink-0 snap-center select-none object-cover"
+          />
+        ))}
       </div>
-      <div className="mt-3 grid grid-cols-6 gap-2 sm:grid-cols-7 lg:grid-cols-6">
-        {[{ src: paletteImage, alt: `Paleta ${palette}` }, ...gallery.slice(1, 6)].map((image, index) => (
+      <div className="mt-3 flex items-center justify-center gap-1.5">
+        {slides.map((image, index) => (
           <button
             key={image.src}
-            onClick={() => setActive(index)}
+            onClick={() => goTo(index)}
+            aria-label={`Ver imagem ${index + 1}`}
+            className={`size-2 rounded-full transition ${active === index ? "bg-primary" : "bg-border"}`}
+          />
+        ))}
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2 sm:grid-cols-7 lg:grid-cols-6">
+        {slides.slice(0, 6).map((image, index) => (
+          <button
+            key={image.src}
+            onClick={() => goTo(index)}
             aria-label={`Ver imagem ${index + 1}`}
             className={`aspect-square overflow-hidden rounded-md border-2 bg-muted transition ${active === index ? "border-primary" : "border-transparent opacity-85 hover:opacity-100"}`}
           >
-            <img src={image.src} alt="" className="h-full w-full object-cover" />
+            <img src={image.src} alt="" draggable={false} className="h-full w-full object-cover" />
           </button>
         ))}
       </div>
@@ -514,11 +562,11 @@ function Index() {
       <section id="kit" className="bg-soft py-16">
         <div className="page-shell px-5">
           <p className="section-kicker text-center">Qualidade em cada detalhe</p>
-          <h2 className="section-title text-center">Feita para o seu descanso</h2>
+          <h2 className="section-title text-center">Como o Puff Serena vem</h2>
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <ProductVideo video={poltronaVideo} title="VEJA EM AÇÃO" subtitle="Você tem 7 dias para trocas ou devoluções." label="Vídeo da poltrona inflável" />
             {[
-              { src: puff250kg.url, alt: "Puff reforçado que suporta até 250 kg" },
+              { src: puffReforcado.url, alt: "Puff reforçado e confortável para relaxar" },
               { src: puffPets.url, alt: "Puff resistente para pets felizes" },
               { src: puffLavavel.url, alt: "Puff pet lavável e impermeável" },
               { src: infograficoEncher.url, alt: "Infográfico de como encher a almofada inflável" },
