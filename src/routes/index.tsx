@@ -311,23 +311,25 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                 key={name}
                 type="button"
                 onClick={() => setPalette(name)}
-                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${i === 1 ? "py-6 scale-[1.03] " : ""}${selected ? "border-primary bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
+                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "py-6 scale-[1.03] " : ""}${selected ? "border-primary bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
-                  <span className="absolute -top-2.5 right-4 rounded-full bg-primary px-3 py-1 text-[11px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
+                  <span className="absolute -top-2.5 right-4 rounded-full bg-banner px-3 py-1 text-[11px] font-extrabold tracking-wider text-banner-foreground">{badge}</span>
                 )}
+
                 <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-primary" : "border-muted-foreground"}`}>
                   {selected && <span className="size-2.5 rounded-full bg-primary" />}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-2">
-                    <strong className={i === 1 ? "text-base" : "text-sm"}>{name}</strong>
+                    <strong className={selected ? "text-base" : "text-sm"}>{name}</strong>
+
                     <span className="rounded bg-discount px-1.5 py-0.5 text-[9px] font-extrabold text-price">ECONOMIZE {opt.off.replace(" OFF", "")}</span>
                   </span>
                   <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
                 </span>
                 <span className="text-right">
-                  <strong className={`block font-extrabold text-price ${i === 1 ? "text-xl" : "text-base"}`}>{opt.price}</strong>
+                  <strong className={`block font-extrabold text-price ${selected ? "text-xl" : "text-base"}`}>{opt.price}</strong>
                   <span className="block text-[11px] text-muted-foreground line-through">{opt.old}</span>
                 </span>
               </button>
@@ -347,7 +349,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
 }
 
 function Index() {
-  const [palette, setPalette] = useState<PaletteName>("1 Puff");
+  const [palette, setPalette] = useState<PaletteName>("2 Puffs");
   const checkout = palettes[palette].checkout;
   const assuranceItems: Array<[LucideIcon, string, string]> = [
     [Truck, "Envio rápido", "para todo Brasil"],
