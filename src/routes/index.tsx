@@ -440,7 +440,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                 key={name}
                 type="button"
                 onClick={() => setPalette(name)}
-                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "py-6 scale-[1.03] " : ""}${selected ? "border-primary bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
+                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "py-6 scale-[1.03] " : ""}${selected ? "border-banner bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
                   <span className="absolute -top-2.5 right-4 rounded-full bg-banner px-3 py-1 text-[11px] font-extrabold tracking-wider text-banner-foreground">{badge}</span>
