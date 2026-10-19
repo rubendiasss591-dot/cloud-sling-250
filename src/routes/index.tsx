@@ -42,7 +42,7 @@ import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
 import conforto3Meses from "@/assets/conforto-3-meses.png.asset.json";
 import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
-import depoimentoAsset from "@/assets/depoimento-poltrona.jpg.asset.json";
+import reviewAsset from "@/assets/review-cliente.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
