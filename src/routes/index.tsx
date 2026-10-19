@@ -42,7 +42,9 @@ import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
 import conforto3Meses from "@/assets/conforto-3-meses.png.asset.json";
 import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
-import reviewAsset from "@/assets/review-cliente.jpg.asset.json";
+import review1Asset from "@/assets/review-1.jpg.asset.json";
+import review2Asset from "@/assets/review-2.jpg.asset.json";
+import review3Asset from "@/assets/review-3.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
@@ -266,11 +268,27 @@ const featured = {
   text: "Muito confortável e prático.",
   when: "Há 3 meses",
   helpful: 3,
-  photo: reviewAsset.url,
+  photo: review1Asset.url,
   photoAlt: "Foto enviada por cliente mostrando a poltrona inflável e o puff na casa dela",
 };
 
 const others = [
+  {
+    name: "Marcos Vinícius",
+    text: "Gostei demais, bem confortável e grande. Ótimo para uma noite de cinema.",
+    when: "Há 2 meses",
+    helpful: 3,
+    photo: review2Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável no quarto",
+  },
+  {
+    name: "Patrícia Gomes",
+    text: "Top, gostei 👍.",
+    when: "Há 3 meses",
+    helpful: 6,
+    photo: review3Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável na sala",
+  },
   {
     name: "Cristiane Almeida",
     text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
@@ -316,12 +334,22 @@ function SocialProof() {
       </article>
       <div className="mx-auto mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
         {others.map((review) => (
-          <article key={review.name} className="rounded-lg border border-border bg-card p-6">
-            <Stars />
-            <blockquote className="mt-3 text-sm font-semibold leading-relaxed">{review.text}</blockquote>
-            <p className="mt-3 text-sm font-bold">{review.name}</p>
-            <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {review.when}</p>
-            <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {review.helpful}</p>
+          <article key={review.name} className="overflow-hidden rounded-lg border border-border bg-card">
+            {"photo" in review && review.photo ? (
+              <img
+                src={review.photo}
+                alt={review.photoAlt}
+                loading="lazy"
+                className="block aspect-[4/5] w-full object-cover"
+              />
+            ) : null}
+            <div className="p-5">
+              <Stars />
+              <blockquote className="mt-3 text-sm font-semibold leading-relaxed">{review.text}</blockquote>
+              <p className="mt-3 text-sm font-bold">{review.name}</p>
+              <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {review.when}</p>
+              <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {review.helpful}</p>
+            </div>
           </article>
         ))}
       </div>
