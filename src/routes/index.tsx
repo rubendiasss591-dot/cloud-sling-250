@@ -299,7 +299,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
 }
 
 function Index() {
-  const [palette, setPalette] = useState<PaletteName>("Bege com Preto");
+  const [palette, setPalette] = useState<PaletteName>("1 Puff");
   const checkout = palettes[palette].checkout;
   const assuranceItems: Array<[LucideIcon, string, string]> = [
     [Truck, "Envio rápido", "para todo Brasil"],
