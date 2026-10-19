@@ -253,6 +253,30 @@ function NossaLojaPlayer() {
   );
 }
 
+function LiveScarcity() {
+  const [viewers, setViewers] = useState(7);
+  const [stock, setStock] = useState(6);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setViewers((v) => Math.min(16, Math.max(2, v + Math.floor(Math.random() * 5) - 2)));
+      setStock((s) => Math.min(8, Math.max(4, s + (Math.random() < 0.5 ? -1 : 1))));
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="mt-3 space-y-2">
+      <p className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75" /><span className="relative inline-flex size-2 rounded-full bg-destructive" /></span>
+        <strong className="text-destructive">{viewers}</strong> Pessoas estão vendo esse produto agora
+      </p>
+      <div className="inline-flex items-center gap-2 rounded-md border border-destructive/40 bg-destructive/10 px-3 py-1.5 text-[11px] font-extrabold text-destructive">
+        <span className="size-2 animate-pulse rounded-full bg-destructive" /> RESTAM {stock} UNIDADES
+        <span className="rounded bg-destructive px-1.5 py-0.5 text-[9px] text-destructive-foreground">AO VIVO</span>
+      </div>
+    </div>
+  );
+}
+
 function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPalette: (palette: PaletteName) => void }) {
   return (
     <section id="comprar" className="min-w-0">
