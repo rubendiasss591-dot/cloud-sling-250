@@ -263,9 +263,9 @@ function ProductVideo({ video, title, subtitle, label }: { video: { url: string 
 
 const featured = {
   name: "Juliana Martins",
-  text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
-  when: "Há 4 semanas",
-  helpful: 2,
+  text: "Muito confortável e prático.",
+  when: "Há 3 meses",
+  helpful: 3,
   photo: reviewAsset.url,
   photoAlt: "Foto enviada por cliente mostrando a poltrona inflável e o puff na casa dela",
 };
@@ -273,9 +273,9 @@ const featured = {
 const others = [
   {
     name: "Cristiane Almeida",
-    text: "Muito confortável e prático.",
-    when: "Há 3 meses",
-    helpful: 3,
+    text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
+    when: "Há 4 semanas",
+    helpful: 2,
   },
   {
     name: "Rafael Souza",
