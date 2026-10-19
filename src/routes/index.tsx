@@ -297,21 +297,21 @@ function SocialProof() {
   return (
     <section aria-labelledby="depoimento-title" className="mt-10 sm:col-span-2 lg:col-span-4">
       <h2 id="depoimento-title" className="section-title text-center">Nossos Clientes</h2>
-      <article className="mx-auto mt-6 grid max-w-2xl overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-[254px_minmax(0,1fr)]">
+      <article className="mx-auto mt-6 grid max-w-xl overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-[190px_minmax(0,1fr)]">
         <img
           src={featured.photo}
           alt={featured.photoAlt}
-          width={254}
-          height={339}
+          width={190}
+          height={253}
           loading="lazy"
-          className="block h-full w-full object-cover"
+          className="block aspect-[3/4] w-full object-cover sm:aspect-auto sm:h-full"
         />
-        <div className="flex flex-col items-start border-t border-border p-6 sm:border-l sm:border-t-0 sm:p-8">
+        <div className="flex flex-col items-start border-t border-border p-5 sm:border-l sm:border-t-0 sm:p-6">
           <Stars />
-          <blockquote className="mt-4 text-lg font-semibold leading-relaxed">{featured.text}</blockquote>
-          <p className="mt-4 text-sm font-bold">{featured.name}</p>
+          <blockquote className="mt-3 text-base font-semibold leading-relaxed">{featured.text}</blockquote>
+          <p className="mt-3 text-sm font-bold">{featured.name}</p>
           <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {featured.when}</p>
-          <p className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {featured.helpful}</p>
+          <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {featured.helpful}</p>
         </div>
       </article>
       <div className="mx-auto mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
