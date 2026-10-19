@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  ThumbsUp,
   Truck,
   Volume2,
   type LucideIcon,
@@ -41,6 +42,7 @@ import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
 import infograficoEncher from "@/assets/infografico-encher.png.asset.json";
 import conforto3Meses from "@/assets/conforto-3-meses.png.asset.json";
 import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
+import depoimentoAsset from "@/assets/depoimento-poltrona.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
@@ -259,6 +261,32 @@ function ProductVideo({ video, title, subtitle, label }: { video: { url: string 
   );
 }
 
+function SocialProof() {
+  return (
+    <section aria-labelledby="depoimento-title" className="mt-10 sm:col-span-2 lg:col-span-4">
+      <h2 id="depoimento-title" className="section-title text-center">Quem comprou, conta</h2>
+      <article className="mx-auto mt-6 grid max-w-2xl overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-[254px_minmax(0,1fr)]">
+        <img
+          src={depoimentoAsset.url}
+          alt="Foto do depoimento mostrando a poltrona inflável com apoio para os pés na sala"
+          width={254}
+          height={450}
+          loading="lazy"
+          className="mx-auto block h-auto w-full max-w-[254px]"
+        />
+        <div className="flex flex-col items-start border-t border-border p-6 sm:border-l sm:border-t-0 sm:p-8">
+          <div className="flex gap-1 text-primary" aria-label="5 de 5 estrelas">
+            {[0, 1, 2, 3, 4].map((star) => <Star key={star} aria-hidden="true" className="size-5 fill-current" />)}
+          </div>
+          <blockquote className="mt-4 text-lg font-semibold leading-relaxed">Muito confortável e prático.</blockquote>
+          <p className="mt-2 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> Há 3 meses</p>
+          <p className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> 3</p>
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function LiveScarcity() {
   const [viewers, setViewers] = useState(7);
   const [stock, setStock] = useState(6);
@@ -412,6 +440,7 @@ function Index() {
               { src: conforto3Meses.url, alt: "Conforto que dura por até 3 meses" },
             ].map((image) => <img key={image.src} src={image.src} alt={image.alt} className="aspect-[9/16] w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
             <ProductVideo video={garantiaVideo} title="CONFIANÇA E GARANTIA" subtitle="Trocas e devoluções em até 30 dias sem complicações." label="Vídeo de confiança e garantia da poltrona inflável" />
+            <SocialProof />
           </div>
         </div>
       </section>
