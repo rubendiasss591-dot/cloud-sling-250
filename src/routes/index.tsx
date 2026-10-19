@@ -46,6 +46,8 @@ import review1Asset from "@/assets/review-1.jpg.asset.json";
 import review2Asset from "@/assets/review-2.jpg.asset.json";
 import review3Asset from "@/assets/review-3.jpg.asset.json";
 import review4Asset from "@/assets/review-4.jpg.asset.json";
+import review5Asset from "@/assets/review-5.jpg.asset.json";
+import review6Asset from "@/assets/review-6.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
@@ -303,12 +305,16 @@ const others = [
     text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
     when: "Há 4 semanas",
     helpful: 2,
+    photo: review6Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável montada na sala",
   },
   {
     name: "Rafael Souza",
     text: "Enche em minutos, segura o peso sem afundar e guarda em qualquer cantinho.",
     when: "Há 2 semanas",
     helpful: 5,
+    photo: review5Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando os puffs embalados e as bombas de ar",
   },
 ];
 
