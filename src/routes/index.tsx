@@ -55,7 +55,7 @@ const allImages = [img1, img2, img3, img4, img5, img6, img7, img8].map((img) => 
 const gallery = allImages.map((src, i) => ({ src, alt: `Poltrona Sofá Inflável 250kg com puff - foto ${i + 1}` }));
 
 const palettes = {
-  "1 Puff": { image: allImages[0], old: "R$ 399,90", price: "R$ 147,90", off: "63% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
+  "1 Puff": { image: allImages[0], old: "R$ 399,90", price: "R$ 49,99", off: "88% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
   "2 Puffs": { image: allImages[0], old: "R$ 799,80", price: "R$ 259,90", off: "67% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
   "4 Puffs": { image: allImages[0], old: "R$ 1.599,60", price: "R$ 479,90", off: "70% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
   "6 Puffs": { image: allImages[0], old: "R$ 2.399,40", price: "R$ 659,90", off: "73% OFF", checkout: "https://checkout.serenapagamentoseguro.store/pay/175b5b7e-a2ec-444e-a173-0db2f1af2805" },
@@ -341,7 +341,7 @@ function Index() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <div className="bg-banner text-banner-foreground">
         <div className="page-shell flex min-h-8 items-center justify-center gap-4 px-4 py-1 text-center text-[10px] font-extrabold uppercase">
-          <span>Promoção especial • Puff de brinde + frete grátis</span><Countdown compact />
+          <span>Promoção especial • Frete grátis somente hoje</span><Countdown compact />
         </div>
       </div>
       <header className="border-b border-border bg-nav">
@@ -376,7 +376,7 @@ function Index() {
       <section id="beneficios" className="page-shell px-5 py-16 text-center">
         <p className="section-kicker">Conforto e resistência</p><h2 className="section-title">O canto de relaxar que sua casa merece</h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map(({ icon: Icon, title, text }) => <article key={title}><div className="mx-auto grid size-12 place-items-center rounded-full bg-selected text-primary"><Icon className="size-6" /></div><h3 className="mt-4 text-base font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
+          {benefits.map(({ icon: Icon, title, text }) => <article key={title}><div className="mx-auto grid size-12 place-items-center rounded-full bg-secondary text-primary"><Icon className="size-6" /></div><h3 className="mt-4 text-base font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
         </div>
       </section>
 
@@ -389,7 +389,7 @@ function Index() {
       </section>
 
       <section className="bg-final py-16 text-final-foreground">
-        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff de brinde a partir de R$ 147,90.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
+        <div className="mx-auto max-w-2xl px-5 text-center"><p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-final-muted">Oferta especial</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Seu novo lugar favorito da casa</h2><p className="mt-4 text-sm text-final-muted">Poltrona 250kg + puff a partir de R$ 49,99.</p><div className="mx-auto mt-7 max-w-md"><BuyButton checkout={checkout} /></div></div>
       </section>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 p-3 backdrop-blur sm:hidden">
         <BuyButton checkout={checkout} />
