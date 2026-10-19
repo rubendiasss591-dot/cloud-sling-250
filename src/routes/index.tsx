@@ -45,6 +45,7 @@ import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
 import review1Asset from "@/assets/review-1.jpg.asset.json";
 import review2Asset from "@/assets/review-2.jpg.asset.json";
 import review3Asset from "@/assets/review-3.jpg.asset.json";
+import review4Asset from "@/assets/review-4.jpg.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
@@ -288,6 +289,14 @@ const others = [
     helpful: 6,
     photo: review3Asset.url,
     photoAlt: "Foto enviada por cliente mostrando a poltrona inflável na sala",
+  },
+  {
+    name: "Fernanda Lima",
+    text: "Comprei pra tomar um sol na varanda e tá sendo maravilhoso, é super confortável. A bomba demorou uns 15 minutos pra encher, mas tenho uma bomba elétrica que me ajudou demais e deu tudo certo.",
+    when: "Há 2 meses",
+    helpful: 4,
+    photo: review4Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável com o puff na varanda",
   },
   {
     name: "Cristiane Almeida",
