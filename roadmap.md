@@ -10,9 +10,9 @@
 - [x] Foto nova do sofá inflável com puff adicionada às fotos do produto
 - [x] Nome no topo da página corrigido para SERENA HOME SHOP (ainda dizia CASA CONFORTO)
 - [x] Regra de escassez: no bloco "AO VIVO" as unidades só diminuem, nunca sobem (param em 4)
+- [x] Preços: 1 Puff R$ 49,97 (de R$ 111,90); tachados = 111,90 × nº de puffs (223,80 / 447,60), ECONOMIZE 55/71/73%, riscados em preto
 
 ## Pendentes (esperando o usuário)
 - [ ] Link de pagamento real da poltrona (botões ainda apontam para o checkout das toalhas)
-- [ ] Preço "de" real (R$ 399,90 por puff ainda é palpite do agente)
 - [ ] Arquivo de vídeo do review (só o frame JPEG está disponível)
 - [ ] Definir se o "frete grátis" do topo e dos cartões deve ser removido
