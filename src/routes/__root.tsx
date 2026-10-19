@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
@@ -10,8 +9,14 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { metaPixelScript } from "../lib/meta-pixel";
+import { utmScript, utmScript2 } from "../lib/utm-script";
+import { redirectWithParams, redirectWithParamsScript } from "../lib/redirect-with-params";
+import { Button } from "@/components/ui/button";
+
 
 function NotFoundComponent() {
   return (
@@ -23,12 +28,12 @@ function NotFoundComponent() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
+          <Button
+            onClick={() => redirectWithParams("/")}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Go home
-          </Link>
+          </Button>
         </div>
       </div>
     </div>
@@ -61,12 +66,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           >
             Try again
           </button>
-          <a
-            href="/"
+          <Button
+            variant="outline"
+            onClick={() => redirectWithParams("/")}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             Go home
-          </a>
+          </Button>
         </div>
       </div>
     </div>
@@ -78,21 +84,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Serena" },
+      { name: "description", content: "Toalhas Serena de algodão turco premium." },
+      { name: "author", content: "Serena" },
+      { property: "og:title", content: "Serena" },
+      { property: "og:description", content: "Toalhas de algodão turco premium." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+    ],
+    scripts: [
+      { type: "text/javascript", children: redirectWithParamsScript },
+      { type: "text/javascript", children: metaPixelScript },
+      { type: "text/javascript", children: utmScript },
+      { type: "text/javascript", children: utmScript2 },
     ],
   }),
   shellComponent: RootShell,
