@@ -261,28 +261,70 @@ function ProductVideo({ video, title, subtitle, label }: { video: { url: string 
   );
 }
 
+const reviews = [
+  {
+    name: "Juliana Martins",
+    text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
+    when: "Há 4 semanas",
+    helpful: 2,
+    photo: reviewAsset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável e o puff na casa dela",
+  },
+  {
+    name: "Cristiane Almeida",
+    text: "Muito confortável e prático.",
+    when: "Há 3 meses",
+    helpful: 3,
+  },
+  {
+    name: "Rafael Souza",
+    text: "Enche em minutos, segura o peso sem afundar e guarda em qualquer cantinho.",
+    when: "Há 2 semanas",
+    helpful: 5,
+  },
+];
+
+function Stars() {
+  return (
+    <div className="flex gap-1 text-primary" aria-label="5 de 5 estrelas">
+      {[0, 1, 2, 3, 4].map((star) => <Star key={star} aria-hidden="true" className="size-5 fill-current" />)}
+    </div>
+  );
+}
+
 function SocialProof() {
+  const [featured, ...others] = reviews;
   return (
     <section aria-labelledby="depoimento-title" className="mt-10 sm:col-span-2 lg:col-span-4">
-      <h2 id="depoimento-title" className="section-title text-center">Quem comprou, conta</h2>
+      <h2 id="depoimento-title" className="section-title text-center">Nossos Clientes</h2>
       <article className="mx-auto mt-6 grid max-w-2xl overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-[254px_minmax(0,1fr)]">
         <img
-          src={depoimentoAsset.url}
-          alt="Foto do depoimento mostrando a poltrona inflável com apoio para os pés na sala"
+          src={featured.photo}
+          alt={featured.photoAlt}
           width={254}
-          height={450}
+          height={339}
           loading="lazy"
-          className="mx-auto block h-auto w-full max-w-[254px]"
+          className="block h-full w-full object-cover"
         />
         <div className="flex flex-col items-start border-t border-border p-6 sm:border-l sm:border-t-0 sm:p-8">
-          <div className="flex gap-1 text-primary" aria-label="5 de 5 estrelas">
-            {[0, 1, 2, 3, 4].map((star) => <Star key={star} aria-hidden="true" className="size-5 fill-current" />)}
-          </div>
-          <blockquote className="mt-4 text-lg font-semibold leading-relaxed">Muito confortável e prático.</blockquote>
-          <p className="mt-2 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> Há 3 meses</p>
-          <p className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> 3</p>
+          <Stars />
+          <blockquote className="mt-4 text-lg font-semibold leading-relaxed">{featured.text}</blockquote>
+          <p className="mt-4 text-sm font-bold">{featured.name}</p>
+          <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {featured.when}</p>
+          <p className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {featured.helpful}</p>
         </div>
       </article>
+      <div className="mx-auto mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
+        {others.map((review) => (
+          <article key={review.name} className="rounded-lg border border-border bg-card p-6">
+            <Stars />
+            <blockquote className="mt-3 text-sm font-semibold leading-relaxed">{review.text}</blockquote>
+            <p className="mt-3 text-sm font-bold">{review.name}</p>
+            <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {review.when}</p>
+            <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {review.helpful}</p>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
