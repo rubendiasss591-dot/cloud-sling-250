@@ -261,15 +261,16 @@ function ProductVideo({ video, title, subtitle, label }: { video: { url: string 
   );
 }
 
-const reviews = [
-  {
-    name: "Juliana Martins",
-    text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
-    when: "Há 4 semanas",
-    helpful: 2,
-    photo: reviewAsset.url,
-    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável e o puff na casa dela",
-  },
+const featured = {
+  name: "Juliana Martins",
+  text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
+  when: "Há 4 semanas",
+  helpful: 2,
+  photo: reviewAsset.url,
+  photoAlt: "Foto enviada por cliente mostrando a poltrona inflável e o puff na casa dela",
+};
+
+const others = [
   {
     name: "Cristiane Almeida",
     text: "Muito confortável e prático.",
@@ -293,7 +294,6 @@ function Stars() {
 }
 
 function SocialProof() {
-  const [featured, ...others] = reviews;
   return (
     <section aria-labelledby="depoimento-title" className="mt-10 sm:col-span-2 lg:col-span-4">
       <h2 id="depoimento-title" className="section-title text-center">Nossos Clientes</h2>
