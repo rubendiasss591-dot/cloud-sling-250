@@ -34,6 +34,7 @@ import img6 from "@/assets/poltrona-6.webp.asset.json";
 import img7 from "@/assets/poltrona-7.webp.asset.json";
 import img8 from "@/assets/poltrona-8.webp.asset.json";
 import garantiaVideo from "@/assets/garantia-video.mp4.asset.json";
+import poltronaVideo from "@/assets/poltrona-video.mp4.asset.json";
 import puff250kg from "@/assets/puff-250kg.png.asset.json";
 import puffPets from "@/assets/puff-pets.png.asset.json";
 import puffLavavel from "@/assets/puff-lavavel.png.asset.json";
@@ -176,7 +177,7 @@ function Gallery({ palette }: { palette: PaletteName }) {
   );
 }
 
-function NossaLojaPlayer() {
+function ProductVideo({ video, title, subtitle, label }: { video: { url: string }; title: string; subtitle: string; label: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [mutedStart, setMutedStart] = useState(false);
@@ -205,19 +206,19 @@ function NossaLojaPlayer() {
 
   return (
     <div className="rounded-lg bg-player p-4 text-player-foreground shadow-product sm:col-span-2 lg:col-span-4">
-      <p className="text-center font-serif text-2xl tracking-[0.3em]">CONFIANÇA E GARANTIA</p>
-      <p className="mt-1 text-center text-xs text-player-muted">Trocas e devoluções em até 30 dias sem complicações.</p>
+      <p className="text-center font-serif text-2xl tracking-[0.3em]">{title}</p>
+      <p className="mt-1 text-center text-xs text-player-muted">{subtitle}</p>
       <div className="relative mt-4 overflow-hidden rounded-md bg-player">
         <video
           ref={videoRef}
-          src={garantiaVideo.url}
+          src={video.url}
           className="mx-auto block max-h-[70vh] w-full cursor-pointer"
           loop
           playsInline
           onClick={togglePlay}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          aria-label="Vídeo de confiança e garantia da poltrona inflável"
+          aria-label={label}
         />
         {mutedStart && isPlaying && (
           <button
