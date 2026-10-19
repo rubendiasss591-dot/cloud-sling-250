@@ -305,8 +305,8 @@ const others = [
     text: "Maravilhosa, super confortável e resistente. Ótima para colocar no quarto.",
     when: "Há 4 semanas",
     helpful: 2,
-    photo: review5Asset.url,
-    photoAlt: "Foto enviada por cliente mostrando os puffs embalados e as bombas de ar",
+    photo: review6Asset.url,
+    photoAlt: "Foto enviada por cliente mostrando a poltrona inflável montada na sala",
   },
   {
     name: "Rafael Souza",
