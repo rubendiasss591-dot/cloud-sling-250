@@ -119,7 +119,7 @@ function BuyButton({ checkout, className = "" }: { checkout: string; className?:
   return (
     <Button
       size="lg"
-      className={`buy-pulse h-16 w-full rounded-full uppercase tracking-wide bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
+      className={`buy-pulse h-16 w-full rounded-md uppercase tracking-wide bg-buy text-base font-extrabold text-buy-foreground shadow-buy hover:bg-buy-hover ${className}`}
       onClick={() => {
         trackInitiateCheckout();
         redirectWithParams(checkout);
@@ -253,6 +253,30 @@ function NossaLojaPlayer() {
   );
 }
 
+function LiveScarcity() {
+  const [viewers, setViewers] = useState(7);
+  const [stock, setStock] = useState(6);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setViewers((v) => Math.min(16, Math.max(2, v + Math.floor(Math.random() * 5) - 2)));
+      setStock((s) => Math.min(8, Math.max(4, s + (Math.random() < 0.5 ? -1 : 1))));
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="mt-3 space-y-2">
+      <p className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75" /><span className="relative inline-flex size-2 rounded-full bg-destructive" /></span>
+        <strong className="text-destructive">{viewers}</strong> Pessoas estão vendo esse produto agora
+      </p>
+      <div className="inline-flex items-center gap-2 rounded-md border border-destructive/40 bg-destructive/10 px-3 py-1.5 text-[11px] font-extrabold text-destructive">
+        <span className="size-2 animate-pulse rounded-full bg-destructive" /> RESTAM {stock} UNIDADES
+        <span className="rounded bg-destructive px-1.5 py-0.5 text-[9px] text-destructive-foreground">AO VIVO</span>
+      </div>
+    </div>
+  );
+}
+
 function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPalette: (palette: PaletteName) => void }) {
   return (
     <section id="comprar" className="min-w-0">
@@ -269,6 +293,7 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
 
 
       <div className="urgency-pulse mt-4 rounded-md bg-urgency px-3 py-2 text-center text-[10px] font-extrabold text-urgency-foreground">ÚLTIMAS UNIDADES DISPONÍVEIS — GARANTA A SUA HOJE!</div>
+      <LiveScarcity />
 
       <fieldset className="mt-5">
         <div className="mb-3 flex items-center gap-3">
@@ -286,23 +311,23 @@ function ProductDetails({ palette, setPalette }: { palette: PaletteName; setPale
                 key={name}
                 type="button"
                 onClick={() => setPalette(name)}
-                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${selected ? "border-price bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
+                className={`relative flex items-center gap-3 rounded-xl border-2 px-4 py-4 text-left transition ${i === 1 ? "py-6 scale-[1.03] " : ""}${selected ? "border-primary bg-selected" : "border-border bg-card hover:border-muted-foreground"}`}
               >
                 {badge && (
-                  <span className="absolute -top-2.5 right-4 rounded-full bg-price px-3 py-0.5 text-[9px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
+                  <span className="absolute -top-2.5 right-4 rounded-full bg-primary px-3 py-1 text-[11px] font-extrabold tracking-wider text-buy-foreground">{badge}</span>
                 )}
-                <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-price" : "border-muted-foreground"}`}>
-                  {selected && <span className="size-2.5 rounded-full bg-price" />}
+                <span className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${selected ? "border-primary" : "border-muted-foreground"}`}>
+                  {selected && <span className="size-2.5 rounded-full bg-primary" />}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-2">
-                    <strong className="text-sm">{name}</strong>
+                    <strong className={i === 1 ? "text-base" : "text-sm"}>{name}</strong>
                     <span className="rounded bg-discount px-1.5 py-0.5 text-[9px] font-extrabold text-price">ECONOMIZE {opt.off.replace(" OFF", "")}</span>
                   </span>
                   <span className="mt-0.5 block text-[11px] text-muted-foreground">Frete grátis incluso</span>
                 </span>
                 <span className="text-right">
-                  <strong className="block text-base font-extrabold text-foreground">{opt.price}</strong>
+                  <strong className={`block font-extrabold text-price ${i === 1 ? "text-xl" : "text-base"}`}>{opt.price}</strong>
                   <span className="block text-[11px] text-muted-foreground line-through">{opt.old}</span>
                 </span>
               </button>
