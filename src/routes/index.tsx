@@ -257,11 +257,21 @@ function LiveScarcity() {
   const [viewers, setViewers] = useState(7);
   const [stock, setStock] = useState(6);
   useEffect(() => {
-    const id = setInterval(() => {
+    const tickViewers = () =>
       setViewers((v) => Math.min(16, Math.max(2, v + Math.floor(Math.random() * 5) - 2)));
+    const tickStock = () =>
       setStock((s) => Math.min(8, Math.max(4, s + (Math.random() < 0.5 ? -1 : 1))));
-    }, 3000);
-    return () => clearInterval(id);
+    let stockId: ReturnType<typeof setInterval> | undefined;
+    const firstStockId = setTimeout(() => {
+      tickStock();
+      stockId = setInterval(tickStock, 120000);
+    }, 20000);
+    const viewersId = setInterval(tickViewers, 60000);
+    return () => {
+      clearTimeout(firstStockId);
+      clearInterval(viewersId);
+      if (stockId) clearInterval(stockId);
+    };
   }, []);
   return (
     <div className="mt-3 space-y-2">
