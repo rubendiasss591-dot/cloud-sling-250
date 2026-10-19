@@ -334,12 +334,22 @@ function SocialProof() {
       </article>
       <div className="mx-auto mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
         {others.map((review) => (
-          <article key={review.name} className="rounded-lg border border-border bg-card p-6">
-            <Stars />
-            <blockquote className="mt-3 text-sm font-semibold leading-relaxed">{review.text}</blockquote>
-            <p className="mt-3 text-sm font-bold">{review.name}</p>
-            <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {review.when}</p>
-            <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {review.helpful}</p>
+          <article key={review.name} className="overflow-hidden rounded-lg border border-border bg-card">
+            {"photo" in review && review.photo ? (
+              <img
+                src={review.photo}
+                alt={review.photoAlt}
+                loading="lazy"
+                className="block aspect-[4/5] w-full object-cover"
+              />
+            ) : null}
+            <div className="p-5">
+              <Stars />
+              <blockquote className="mt-3 text-sm font-semibold leading-relaxed">{review.text}</blockquote>
+              <p className="mt-3 text-sm font-bold">{review.name}</p>
+              <p className="mt-1 text-xs text-muted-foreground">Brasil <span aria-hidden="true" className="mx-2">·</span> {review.when}</p>
+              <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">Útil <ThumbsUp aria-hidden="true" className="size-4" /> {review.helpful}</p>
+            </div>
           </article>
         ))}
       </div>
