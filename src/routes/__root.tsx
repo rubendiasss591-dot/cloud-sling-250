@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { metaPixelScript } from "../lib/meta-pixel";
+import { metaPixelScript, META_PIXEL_ID } from "../lib/meta-pixel";
 import { utmScript, utmScript2 } from "../lib/utm-script";
 import { redirectWithParams, redirectWithParamsScript } from "../lib/redirect-with-params";
 import { Button } from "@/components/ui/button";
@@ -122,6 +122,16 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <noscript>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
