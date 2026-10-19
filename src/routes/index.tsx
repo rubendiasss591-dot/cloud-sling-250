@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   BadgeCheck,
   Check,
+  ChevronRight,
   Clock3,
   LockKeyhole,
   PackageCheck,
