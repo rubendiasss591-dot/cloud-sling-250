@@ -35,6 +35,7 @@ import img6 from "@/assets/poltrona-6.webp.asset.json";
 import img7 from "@/assets/poltrona-7.webp.asset.json";
 import img8 from "@/assets/poltrona-8.webp.asset.json";
 import nossaLojaVideo from "@/assets/poltrona-video.mp4.asset.json";
+import bombaAsset from "@/assets/bomba-de-ar.png.asset.json";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { redirectWithParams } from "@/lib/redirect-with-params";
 
