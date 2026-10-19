@@ -403,7 +403,7 @@ function Index() {
           <p className="section-kicker text-center">Qualidade em cada detalhe</p>
           <h2 className="section-title text-center">Feita para o seu descanso</h2>
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <NossaLojaPlayer />
+            <ProductVideo video={poltronaVideo} title="VEJA EM AÇÃO" subtitle="Você tem 7 dias para trocas ou devoluções." label="Vídeo da poltrona inflável" />
             {[
               { src: puff250kg.url, alt: "Puff reforçado que suporta até 250 kg" },
               { src: puffPets.url, alt: "Puff resistente para pets felizes" },
@@ -411,6 +411,7 @@ function Index() {
               { src: infograficoEncher.url, alt: "Infográfico de como encher a almofada inflável" },
               { src: conforto3Meses.url, alt: "Conforto que dura por até 3 meses" },
             ].map((image) => <img key={image.src} src={image.src} alt={image.alt} className="aspect-[9/16] w-full rounded-lg object-cover shadow-product sm:col-span-1 lg:col-span-2" />)}
+            <ProductVideo video={garantiaVideo} title="CONFIANÇA E GARANTIA" subtitle="Trocas e devoluções em até 30 dias sem complicações." label="Vídeo de confiança e garantia da poltrona inflável" />
           </div>
         </div>
       </section>
